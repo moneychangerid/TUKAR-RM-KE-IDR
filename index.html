@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Money Changer Pro – Glow Edition</title>
+<title>Money Changer Pro – Glow & Gradient</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -49,7 +49,7 @@ button:hover{transform:scale(1.03); box-shadow:0 6px 18px var(--shadow);}
 .petunjuk{font-size:13px;background:rgba(255,255,255,0.05);padding:10px;border-left:3px solid var(--accent);border-radius:8px;margin-bottom:15px;color:#cccccc;}
 .result-card{
     display:none;
-    background: linear-gradient(45deg,#00ffba,#00a884,#00d68f,#00ffba);
+    background: linear-gradient(270deg,#00ffba,#00a884,#00d68f,#00ffba);
     background-size:400% 400%;
     padding:16px;
     border-radius:14px;
@@ -68,6 +68,12 @@ button:hover{transform:scale(1.03); box-shadow:0 6px 18px var(--shadow);}
 .ticker{margin-top:20px; padding:10px; background:linear-gradient(90deg,#00d4ff,#0095ff); color:white; border-radius:10px; overflow:hidden; font-weight:bold;}
 .ticker span{display:inline-block; white-space:nowrap; animation:tickerMove 15s linear infinite;}
 @keyframes tickerMove{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+.benefits{display:grid; grid-template-columns:repeat(2,1fr); gap:15px; margin-top:20px;}
+.benefit-card{padding:15px; border-radius:15px; background:linear-gradient(135deg,#00d68f,#00a884); color:white; font-weight:600; text-align:center; backdrop-filter:blur(10px); box-shadow:0 5px 20px rgba(0,0,0,0.3);}
+.testi-section{margin-top:30px; padding:20px; background:rgba(255,255,255,0.05); border-radius:20px; backdrop-filter:blur(10px);}
+.testi-section h3{margin-bottom:10px; font-weight:700;}
+.testi-card{padding:12px; margin:8px 0; border-radius:12px; background:rgba(0,0,0,0.3); color:white;}
+footer{margin-top:40px;padding:25px;border-radius:18px;background:linear-gradient(135deg,#00a884,#00d68f);color:white;text-align:center;animation:fadeIn 1s ease;}
 </style>
 </head>
 <body>
@@ -83,7 +89,7 @@ button:hover{transform:scale(1.03); box-shadow:0 6px 18px var(--shadow);}
     <div class="petunjuk">
         📌 Upload bukti transfer & isi data. Fee otomatis sesuai jumlah RM.<br>
         Saat klik "Chat Admin", WhatsApp akan terbuka.<br>
-        ⚠ Gambar tidak bisa dikirim otomatis, silakan pilih manual di WhatsApp.
+        ⚠ Gambar tidak bisa dikirim otomatis, pilih manual di WhatsApp.
     </div>
 
     <label>Nama Pengirim</label>
@@ -110,7 +116,23 @@ button:hover{transform:scale(1.03); box-shadow:0 6px 18px var(--shadow);}
     <button onclick="kirimWA()">Chat Admin</button>
 
     <div class="ticker"><span>💵 Rate RM → IDR: 3.6k | 💵 Update Live | 💵 Pro Service</span></div>
+
+    <div class="benefits">
+        <div class="benefit-card">⚡ Proses Cepat</div>
+        <div class="benefit-card">🛡 Aman & Terpercaya</div>
+        <div class="benefit-card">💰 Rate Kompetitif</div>
+        <div class="benefit-card">📞 Support 24 Jam</div>
+    </div>
+
+    <div class="testi-section">
+        <h3>Apa Kata Pelanggan?</h3>
+        <div class="testi-card">“Proses cepat, rate bagus! Langganan terus.” — Andi</div>
+        <div class="testi-card">“Admin responsif, aman terpercaya.” — Nurul</div>
+        <div class="testi-card">“Rekomendasi banget buat convert RM.” — Hafiz</div>
+    </div>
 </div>
+
+<footer>© 2025 Jasa Exchange RM – All Rights Reserved</footer>
 
 <script>
 const preview=document.getElementById('preview');
@@ -178,4 +200,4 @@ function kirimWA(){
 }
 </script>
 </body>
-            </html>
+</html>
