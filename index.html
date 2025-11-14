@@ -222,9 +222,25 @@ function hitung() {
         spesial: 3.7
     }[metode];
 
+function hitungFee(rm, idr) {
+  let feeRate = 0.03; // default 3%
+
+  if (rm >= 1000 && rm < 2000) {
+    feeRate = 0.02; // 2%
+  } 
+  else if (rm >= 2000) {
+    feeRate = 0.015; // 1.5%
+  }
+
+  return { 
+    fee: feeRate,
+    potongan: idr * feeRate
+  };
+}
     let idr = rm * rate * 1000;
-    let potongan = idr * fee;
-    let total = idr - potongan;
+    let feeData = hitungFee(rm, idr);
+let potongan = feeData.potongan;
+let total = idr - potongan;
 
     document.getElementById("hasil").innerHTML = `
         <b>Live Global Rate:</b> ${rateGlobal}<br>
