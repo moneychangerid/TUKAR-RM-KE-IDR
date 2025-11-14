@@ -3,128 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Money Changer Pro - Konfirmasi Transfer</title>
+<title>Money Changer Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg: #0c0c0c;
+:root{
+    --bg:#0c0c0c;
     --card: rgba(20,20,20,0.8);
-    --text: #e5e5e5;
-    --accent: #00d68f;
-    --primary: #00a884;
+    --text:#e5e5e5;
+    --accent:#00d68f;
+    --primary:#00a884;
     --shadow: rgba(0,0,0,0.4);
 }
-
-body {
-    background: linear-gradient(135deg, #0c0c0c, #1a1a1a);
-    font-family: 'Poppins', sans-serif;
-    color: var(--text);
-    margin: 0;
-    padding: 20px;
+body{
+    margin:0;
+    padding:0;
+    font-family:'Poppins', sans-serif;
+    background:#0c0c0c;
+    color:var(--text);
+    overflow-x:hidden;
 }
-
-.header {
-    text-align: center;
-    margin-bottom: 20px;
+.bg-symbols{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text x="0" y="20" font-size="20" fill="%2300d68f">💵</text></svg>');
+    opacity:0.05; z-index:-1; animation: moveBg 60s linear infinite;
 }
+@keyframes moveBg{0%{background-position:0 0;}100%{background-position:1000px 1000px;}}
 
-.logo {
-    width: 72px;
-    height: 72px;
-    border-radius: 18px;
-    margin: auto;
-    background: linear-gradient(135deg, #00d68f, #00bfa5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-weight: 800;
-    font-size: 28px;
-    box-shadow: 0 6px 18px var(--shadow);
-}
+.header{text-align:center;margin:30px 0;}
+.logo{width:72px;height:72px;border-radius:18px;margin:auto;
+display:flex;justify-content:center;align-items:center;
+background:linear-gradient(135deg,var(--primary),var(--accent));
+color:white;font-weight:800;font-size:28px;box-shadow:0 6px 18px var(--shadow);
+animation:pop 0.5s ease;}
+@keyframes pop{0%{transform:scale(0.7);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.header h2{margin:10px 0 0 0;} .header small{opacity:0.7;font-size:14px;}
 
-.card {
-    max-width: 480px;
-    margin: auto;
-    background: var(--card);
-    backdrop-filter: blur(12px);
-    border-radius: 18px;
-    padding: 25px;
-    box-shadow: 0 8px 30px var(--shadow);
-    animation: fadeIn 0.6s ease;
-}
+.card{max-width:480px;margin:auto;background:var(--card);
+backdrop-filter:blur(12px);border-radius:18px;padding:25px;
+box-shadow:0 8px 30px var(--shadow);animation:fadeIn 0.6s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(15px);} to{opacity:1; transform:translateY(0);}}
 
-@keyframes fadeIn {
-    from {opacity:0; transform: translateY(15px);}
-    to {opacity:1; transform: translateY(0);}
-}
+input, select{width:100%;padding:12px;margin:8px 0 15px 0;border-radius:12px;border:none;background:rgba(255,255,255,0.05);color:white;font-size:14px;transition:0.3s;}
+input:focus, select:focus{background:rgba(255,255,255,0.12);outline:none;}
+button{width:100%;padding:14px;background:linear-gradient(135deg,var(--primary),var(--accent));
+color:white;font-size:16px;font-weight:600;border:none;border-radius:12px;
+cursor:pointer;box-shadow:0 4px 12px var(--shadow);transition:0.25s;}
+button:hover{transform:scale(1.03); box-shadow:0 6px 18px var(--shadow);}
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0 15px 0;
-    border-radius: 12px;
-    border: none;
-    background: rgba(255,255,255,0.05);
-    color: white;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-input:focus, select:focus {
-    background: rgba(255,255,255,0.12);
-    outline: none;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px var(--shadow);
-    transition: 0.25s;
-}
-
-button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 18px var(--shadow);
-}
-
-#preview {
-    display: none;
-    max-width: 100%;
-    border-radius: 12px;
-    margin-top: 10px;
-    border: 2px solid var(--accent);
-    box-shadow: 0 4px 10px var(--shadow);
-}
-
-.petunjuk {
-    font-size: 13px;
-    background: rgba(255,255,255,0.05);
-    padding: 10px;
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    margin-bottom: 15px;
-    color: #cccccc;
-}
-
-.result-card {
-    display: none;
-    background: rgba(0,0,0,0.2);
-    padding: 12px;
-    border-radius: 12px;
-    margin-top: 15px;
-    box-shadow: inset 0 0 8px var(--shadow);
-    font-size: 14px;
-}
+#preview{display:none; max-width:100%; border-radius:12px; margin-top:10px; border:2px solid var(--accent); box-shadow:0 4px 10px var(--shadow);}
+.petunjuk{font-size:13px;background:rgba(255,255,255,0.05);padding:10px;border-left:3px solid var(--accent);border-radius:8px;margin-bottom:15px;color:#cccccc;}
+.result-card{display:none;background:rgba(0,0,0,0.2);padding:12px;border-radius:12px;margin-top:15px;box-shadow: inset 0 0 8px var(--shadow); font-size:14px; animation:slideUp 0.5s ease;}
+@keyframes slideUp{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+.ticker{margin-top:20px; padding:10px; background:linear-gradient(90deg,#00d4ff,#0095ff); color:white; border-radius:10px; overflow:hidden; font-weight:bold;}
+.ticker span{display:inline-block; white-space:nowrap; animation:tickerMove 15s linear infinite;}
+@keyframes tickerMove{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
+.section{max-width:480px;margin:40px auto;padding:20px;background:rgba(255,255,255,0.05);border-radius:18px;}
+.section h3{text-align:center;margin-bottom:15px;}
+.section ul{list-style:none;padding:0;}
+.section ul li{margin:8px 0;padding-left:20px;position:relative;}
+.section ul li:before{content:'✔';position:absolute;left:0;color:var(--accent);}
+.section .testi-card{padding:12px;margin:10px 0;border-radius:12px;background:rgba(0,0,0,0.2);color:white;}
 </style>
 </head>
 <body>
+<div class="bg-symbols"></div>
 
 <div class="header">
     <div class="logo">RM</div>
@@ -159,47 +101,79 @@ button:hover {
 
     <div class="result-card" id="resultCard"></div>
 
+    <button onclick="hitungIDR()">Hitung IDR & Fee</button>
     <button onclick="kirimWA()">Chat Admin</button>
+
+    <div class="ticker"><span>💵 Rate RM → IDR: 3.6k | 💵 Update Live | 💵 Pro Service</span></div>
+</div>
+
+<div class="section">
+    <h3>Kenapa Pilih Jasa Kami?</h3>
+    <ul>
+        <li>Proses Cepat 24 Jam</li>
+        <li>Aman & Terpercaya</li>
+        <li>Rate Kompetitif</li>
+        <li>Live Rate Realtime</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h3>Apa Kata Pelanggan?</h3>
+    <div class="testi-card">“Proses cepat, rate bagus! Langganan terus.” — Andi</div>
+    <div class="testi-card">“Admin responsif, aman terpercaya.” — Nurul</div>
+    <div class="testi-card">“Rekomendasi banget buat convert RM.” — Hafiz</div>
 </div>
 
 <script>
-    const preview = document.getElementById('preview');
-    const resultCard = document.getElementById('resultCard');
+const preview = document.getElementById('preview');
+const resultCard = document.getElementById('resultCard');
 
-    document.getElementById('bukti').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-            preview.src = evt.target.result;
-            preview.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-    });
-
-    function kirimWA() {
-        const nama = document.getElementById('nama').value;
-        const jumlah = document.getElementById('jumlah').value;
-        const metode = document.getElementById('metode').value;
-
-        if(!nama || !jumlah) {
-            alert("Harap isi semua data!");
-            return;
-        }
-
-        // Tampilkan ringkasan di halaman
-        resultCard.style.display = 'block';
-        resultCard.innerHTML = `<b>Ringkasan Konfirmasi</b><br>
-                                Nama: ${nama}<br>
-                                Jumlah: ${jumlah} RM<br>
-                                Metode: ${metode}`;
-
-        // WA link
-        const admin = "6281385371544"; // ganti nomor admin
-        const pesan = `*Konfirmasi Transfer*\nNama: ${nama}\nJumlah: ${jumlah} RM\nMetode: ${metode}\n📎 Bukti transfer akan dipilih manual di WhatsApp`;
-        window.location.href = "https://wa.me/" + admin + "?text=" + encodeURIComponent(pesan);
+document.getElementById('bukti').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt){
+        preview.src = evt.target.result;
+        preview.style.display='block';
     }
-</script>
+    reader.readAsDataURL(file);
+});
 
+function hitungIDR(){
+    const nama = document.getElementById('nama').value;
+    const jumlah = parseFloat(document.getElementById('jumlah').value);
+    const metode = document.getElementById('metode').value;
+    if(!nama || !jumlah){ alert("Isi semua data!"); return; }
+
+    let feePercent=0;
+    if(jumlah>=1 && jumlah<=999) feePercent=0.025;
+    else if(jumlah>=1000 && jumlah<=4999) feePercent=0.02;
+    else if(jumlah>=5000 && jumlah<=10000) feePercent=0.012;
+
+    let rate = 3.6; // contoh rate
+    let idr = jumlah * rate * 1000;
+    let fee = idr * feePercent;
+    let total = idr - fee;
+
+    resultCard.style.display='block';
+    resultCard.innerHTML=`<b>Ringkasan Konfirmasi</b><br>
+        Nama: ${nama}<br>
+        Jumlah: ${jumlah} RM<br>
+        Metode: ${metode}<br>
+        Fee (${(feePercent*100).toFixed(1)}%): ${Math.floor(fee).toLocaleString()} IDR<br>
+        Total IDR: ${Math.floor(total).toLocaleString()}`;
+}
+
+function kirimWA(){
+    const nama = document.getElementById('nama').value;
+    const jumlah = document.getElementById('jumlah').value;
+    const metode = document.getElementById('metode').value;
+    if(!nama || !jumlah){ alert("Isi semua data!"); return; }
+
+    const admin="6281385371544";
+    const pesan=`*Konfirmasi Transfer*\nNama: ${nama}\nJumlah: ${jumlah} RM\nMetode: ${metode}\n📎 Bukti transfer akan dipilih manual di WhatsApp`;
+    window.location.href="https://wa.me/"+admin+"?text="+encodeURIComponent(pesan);
+}
+</script>
 </body>
 </html>
