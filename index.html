@@ -6,9 +6,7 @@
 <title>JASA EXCHANGE RM – Money Changer Pro</title>
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
 :root {
     --bg: #0b0c10;
@@ -19,7 +17,6 @@
     --accent: #00f2a5;
     --shadow: rgba(0,0,0,0.5);
 }
-
 body {
     font-family: "Poppins", sans-serif;
     background: var(--bg);
@@ -28,7 +25,6 @@ body {
     padding:20px;
     overflow-x:hidden;
 }
-
 .navbar {
     display:flex;
     justify-content:space-between;
@@ -55,7 +51,6 @@ body {
     cursor:pointer;
     font-size:14px;
 }
-
 .header{
     text-align:center;
     margin-bottom:20px;
@@ -73,7 +68,6 @@ body {
     animation: pop 0.5s ease;
 }
 @keyframes pop {0%{transform:scale(0.7);opacity:0;}100%{transform:scale(1);opacity:1;}}
-
 .container {
     max-width:480px;
     margin:auto;
@@ -85,7 +79,6 @@ body {
     animation: fadeIn 0.5s ease;
 }
 @keyframes fadeIn {from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
 input, select {
     width:100%; padding:14px; margin:10px 0; border:none; border-radius:14px;
     background: rgba(255,255,255,0.1); color:white;
@@ -97,33 +90,29 @@ button {
     transition:0.25s; box-shadow:0 3px 12px var(--shadow);
 }
 button:hover {transform:scale(1.03); box-shadow:0 4px 16px var(--shadow);}
-
 #hasil {
     padding:15px; margin-top:12px;
     background: var(--glass); border-radius:14px; font-weight:500;
     box-shadow: inset 0 0 10px var(--shadow);
 }
-
 #loading {display:none; text-align:center; padding:8px; animation: blink 1s infinite;}
 @keyframes blink {0%{opacity:0.3;}100%{opacity:1;}}
-
-footer {
-    text-align:center; margin-top:30px; font-size:13px; opacity:0.6;
-}
-
-/* Animated background symbols */
-#bgSymbols {
-    position: fixed; top:0; left:0; width:100%; height:100%;
-    pointer-events:none; z-index:-1;
-}
-.symbol {
-    position:absolute; color: rgba(255,255,255,0.05);
-    font-size: 24px; animation: float 15s linear infinite;
-}
+footer {text-align:center; margin-top:30px; font-size:13px; opacity:0.6;}
+#bgSymbols {position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;}
+.symbol {position:absolute; color: rgba(255,255,255,0.05); font-size: 24px; animation: float 15s linear infinite;}
 @keyframes float {0%{transform:translateY(100vh);}100%{transform:translateY(-10vh);}}
+.benefits-container{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:30px;}
+.benefit-card{padding:15px;border-radius:15px;background:linear-gradient(135deg,#4da3ff,#00f2a5);text-align:center;font-weight:600;animation:popIn 0.8s ease;}
+@keyframes popIn{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+.testi-section{margin-top:40px;padding:20px;background:rgba(0,0,0,0.2);border-radius:20px;}
+.testi-section h3{margin-bottom:10px;font-weight:700;}
+.testi-card{padding:12px;margin:8px 0;border-radius:12px;background:rgba(0,0,0,0.3);color:white;}
+.running-ticker{margin-top:30px;padding:10px;background:linear-gradient(90deg,#00d4ff,#0095ff);color:white;border-radius:10px;overflow:hidden;font-weight:bold;animation:glow 2s infinite alternate;}
+@keyframes glow{from{box-shadow:0 0 5px #00d4ff;}to{box-shadow:0 0 18px #0095ff;}}
+.running-ticker span{animation:tickerMove 12s linear infinite;white-space:nowrap;display:inline-block;}
+@keyframes tickerMove{from{transform:translateX(100%);}to{transform:translateX(-100%);}}
 </style>
 </head>
-
 <body>
 <div id="bgSymbols"></div>
 
@@ -166,76 +155,82 @@ footer {
 
     <h3>Mini Chart RM → IDR</h3>
     <canvas id="rateChart" height="150"></canvas>
+
+    <div class="running-ticker"><span id="tickerText">Loading realtime RM/IDR rate...</span></div>
+
+    <div class="benefits-container">
+        <div class="benefit-card">⚡ Proses Cepat</div>
+        <div class="benefit-card">🛡 Aman Terpercaya</div>
+        <div class="benefit-card">💰 Rate Kompetitif</div>
+        <div class="benefit-card">📞 Support 24 Jam</div>
+    </div>
+
+    <div class="testi-section">
+        <h3>Apa Kata Pelanggan?</h3>
+        <div class="testi-card">“Proses cepat, rate bagus! Langganan terus.” — Andi</div>
+        <div class="testi-card">“Admin responsif, aman terpercaya.” — Nurul</div>
+        <div class="testi-card">“Rekomendasi banget buat convert RM.” — Hafiz</div>
+    </div>
 </div>
 
-<footer>
-© 2025 Jasa Exchange RM – All Rights Reserved
-</footer>
+<footer>© 2025 Jasa Exchange RM – All Rights Reserved</footer>
 
 <script>
-let rateGlobal = 0;
-
-// Background symbols
-const bg = document.getElementById("bgSymbols");
-const symbols = ["💵","💴","💰","💸","🪙"];
+let rateGlobal=0;
+const bg=document.getElementById("bgSymbols");
+const symbols=["💵","💴","💰","💸","🪙"];
 for(let i=0;i<30;i++){
-    let span = document.createElement("span");
+    let span=document.createElement("span");
     span.className="symbol";
     span.style.left=Math.random()*100+"%";
     span.style.fontSize=(20+Math.random()*30)+"px";
     span.style.animationDuration=(10+Math.random()*10)+"s";
-    span.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    span.innerText=symbols[Math.floor(Math.random()*symbols.length)];
     bg.appendChild(span);
 }
 
-// Fetch global rate
-async function fetchRate() {
+async function fetchRate(){
     document.getElementById("loading").style.display="block";
     try{
-        let res = await fetch("https://api.exchangerate-api.com/v4/latest/MYR");
-        let data = await res.json();
-        rateGlobal = data.rates.IDR;
+        let res=await fetch("https://api.exchangerate-api.com/v4/latest/MYR");
+        let data=await res.json();
+        rateGlobal=data.rates.IDR;
+        document.getElementById("tickerText").innerText=`Live Rate RM/IDR: ${rateGlobal}`;
     }catch{
-        rateGlobal = 3600;
+        rateGlobal=3600;
+        document.getElementById("tickerText").innerText=`Rate RM/IDR default: ${rateGlobal}`;
     }
     document.getElementById("loading").style.display="none";
 }
 fetchRate();
 
-// Hitung IDR
 function hitung(){
-    let rm = parseFloat(document.getElementById("rm").value);
-    let metode = document.getElementById("metode").value;
+    let rm=parseFloat(document.getElementById("rm").value);
+    let metode=document.getElementById("metode").value;
     if(!rm) return alert("Masukkan jumlah RM!");
 
-    let feePerc = 0;
+    let feePerc=0;
     if(rm>=1 && rm<=999) feePerc=0.025;
     else if(rm>=1000 && rm<=4999) feePerc=0.02;
     else if(rm>=5000 && rm<=10000) feePerc=0.012;
 
-    let rate = {
-        bank: 3.6,
-        tng: 3.6,
-        shopee:3.5,
-        spesial:3.7
-    }[metode];
+    let rate={bank:3.6,tng:3.6,shopee:3.5,spesial:3.7}[metode];
 
-    let idr = rm*rate*1000;
-    let fee = idr*feePerc;
-    let total = idr - fee;
+    let idr=rm*rate*1000;
+    let fee=idr*feePerc;
+    let total=idr-fee;
 
     document.getElementById("hasil").innerHTML=`
-    <b>Live Global Rate:</b> ${rateGlobal}<br>
-    <b>Rate Dipakai:</b> ${rate}<br>
-    <b>Fee ${(feePerc*100).toFixed(1)}%:</b> ${Math.floor(fee).toLocaleString()}<br><br>
-    <b style="font-size:20px">Total IDR:</b><br>
-    <span style="font-size:26px;color:var(--primary);font-weight:700;">${Math.floor(total).toLocaleString()}</span>
+        <b>Live Global Rate:</b> ${rateGlobal}<br>
+        <b>Rate Dipakai:</b> ${rate}<br>
+        <b>Fee ${(feePerc*100).toFixed(1)}%:</b> ${Math.floor(fee).toLocaleString()}<br><br>
+        <b style="font-size:20px">Total IDR:</b><br>
+        <span style="font-size:26px;color:var(--primary);font-weight:700;">${Math.floor(total).toLocaleString()}</span>
     `;
 
-    updateChart(rm*rate*1000); // Update chart dengan total IDR
+    updateChart(total);
 }
 
-// Kirim WA
 function kirimWA(){
     let nama=document.getElementById("nama").value;
     let rm=document.getElementById("rm").value;
@@ -246,49 +241,26 @@ function kirimWA(){
     if(!nama||!rm) return alert("Isi nama & jumlah RM dulu!");
 
     let text=`Halo Admin, saya ${nama} ingin convert ${rm}RM via ${metode}.\nHasil IDR:\n${hasil}\n`;
-
     if(fileInput.files.length>0) text+="(Bukti transfer sudah diunggah)";
 
     let url=`https://wa.me/6281385371544?text=${encodeURIComponent(text)}`;
     window.open(url,"_blank");
 }
 
-// Toggle dark mode
-function toggleTheme(){
-    // warna selalu dark di versi ini
-}
+function toggleTheme(){}
 
-// Mini chart
 const ctx=document.getElementById("rateChart").getContext("2d");
 const chart=new Chart(ctx,{
     type:'line',
-    data:{
-        labels:[],
-        datasets:[{
-            label:'Total IDR',
-            data:[],
-            borderColor:'rgba(77,163,255,1)',
-            backgroundColor:'rgba(0,242,165,0.2)',
-            tension:0.3,
-            fill:true
-        }]
-    },
-    options:{
-        responsive:true,
-        plugins:{legend:{display:false}},
-        scales:{x:{display:false},y:{beginAtZero:true}}
-    }
+    data:{labels:[],datasets:[{label:'Total IDR',data:[],borderColor:'rgba(77,163,255,1)',backgroundColor:'rgba(0,242,165,0.2)',tension:0.3,fill:true}]},
+    options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{display:false},y:{beginAtZero:true}}}
 });
-
 function updateChart(total){
     const now=new Date();
     let label=`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
     chart.data.labels.push(label);
     chart.data.datasets[0].data.push(total);
-    if(chart.data.labels.length>20){ // max 20 data points
-        chart.data.labels.shift();
-        chart.data.datasets[0].data.shift();
-    }
+    if(chart.data.labels.length>20){chart.data.labels.shift(); chart.data.datasets[0].data.shift();}
     chart.update();
 }
 </script>
