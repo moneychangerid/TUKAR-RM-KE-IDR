@@ -1,76 +1,150 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>JASA EXCHANGE RM — Pro (Realtime Rate)</title>
-<style>
-/* ---------- Basic UI ---------- */
-:root{--bg:#05060a;--card:#0f1720;--accent:#00eaff;--muted:#9aa6b2}
-body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#020214 0%,var(--bg) 100%);color:#e8f7ff;padding:22px}
-.container{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:18px;align-items:start}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),var(--card));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,.6)}
-.header{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.logo{display:flex;align-items:center;gap:12px}
-.logo svg{width:56px;height:56px}
-.title{color:var(--accent);font-weight:700;font-size:18px}
-.muted{color:var(--muted);font-size:13px}
-
-/* form */
-.field{margin-top:12px}
-input[type=number], input[type=text]{width:100%;padding:12px;border-radius:10px;border:none;background:rgba(255,255,255,0.02);color:inherit;font-size:15px}
-.buttons-row{display:flex;gap:10px;margin-top:12px}
-.btn{padding:12px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700}
-.btn-primary{background:linear-gradient(90deg,var(--accent),#7be0ff);color:#002;box-shadow:0 8px 30px rgba(0,234,255,0.08)}
-.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit}
-
-/* methods */
-.methods{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-.method{background:rgba(255,255,255,0.02);padding:12px;border-radius:12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;border:1px solid rgba(255,255,255,0.02)}
-.method.active{box-shadow:0 10px 30px rgba(0,234,255,0.08);border-color:rgba(0,234,255,0.14);transform:translateY(-3px)}
-.method.disabled{opacity:.35;cursor:not-allowed;transform:none}
-
-/* result */
-.result{margin-top:14px;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,0.2),rgba(0,0,0,0.06));}
-.big{font-size:20px;font-weight:800;color:#9ef3ff}
-.sub{font-size:13px;color:var(--muted)}
-
-/* loading */
-.loading{display:none;text-align:center;margin-top:12px}
-.loader{width:36px;height:36px;border-radius:50%;border:4px solid rgba(0,234,255,0.18);border-top-color:var(--accent);margin:8px auto;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* right column */
-.summary .field{margin-top:8px}
-.chip{display:inline-block;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
-.small{font-size:13px;color:var(--muted)}
-
-/* neon */
-.neon{box-shadow:0 8px 30px rgba(0,234,255,0.06);border:1px solid rgba(0,234,255,0.04)}
-
-/* floating chat admin */
-.chat-admin{position:fixed;right:20px;bottom:20px;background:var(--accent);color:#012;padding:12px 16px;border-radius:999px;font-weight:800;box-shadow:0 8px 30px rgba(0,234,255,0.12);cursor:pointer}
-
-/* modal history */
-.modal-bg{position:fixed;inset:0;background:rgba(2,6,23,0.7);display:none;align-items:center;justify-content:center;z-index:60}
-.modal{background:var(--card);padding:16px;border-radius:12px;width:92%;max-width:720px;max-height:80vh;overflow:auto;border:1px solid rgba(255,255,255,0.03)}
-.history-item{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
-@media(max-width:920px){.container{grid-template-columns:1fr;}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JASA EXCHANGE RM</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #111111;
+            --card: #f2f2f2;
+        }
+        [data-theme="dark"] {
+            --bg: #0d0d0d;
+            --text: #ffffff;
+            --card: #1a1a1a;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .container {
+            max-width: 450px;
+            margin: auto;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .toggle-btn {
+            float: right;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: #007bff;
+            color: #fff;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        #loading {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body>
+<body data-theme="light"><div class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</div>
+<h2 style="text-align:center;">JASA EXCHANGE RM</h2><div class="container">
+    <label>Nama Pengirim</label>
+    <input type="text" id="nama" placeholder="Masukkan nama Anda"><label>Jumlah RM</label>
+<input type="number" id="rm" placeholder="Masukkan jumlah RM">
 
-<div class="container">
-  <!-- LEFT: MAIN -->
-  <div class="card">
-    <div class="header">
-      <div class="logo">
-        <!-- SVG logo (inline) -->
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="6" width="22" height="12" rx="3" fill="#00eaff" opacity="0.14"/>
-          <path d="M12 3L2 8l10 5 10-5-10-5z" fill="#00eaff"/>
-          <circle cx="12" cy="12" r="2.5" fill="#00eaff"/>
-        </svg>
+<label>Metode</label>
+<select id="metode">
+    <option value="bank">Bank</option>
+    <option value="tng">TNG</option>
+    <option value="shopee">Shopee</option>
+    <option value="spesial">Spesial > RM2000</option>
+</select>
+
+<div id="loading">Mengambil rate global...</div>
+
+<button onclick="hitung()">Hitung IDR</button>
+
+<h3>Hasil:</h3>
+<div id="hasil">-</div>
+
+<button onclick="kirimWA()">Chat Admin</button>
+
+</div><script>
+let rateGlobal = 0;
+
+async function fetchRate() {
+    document.getElementById("loading").style.display = "block";
+    try {
+        let res = await fetch("https://api.exchangerate-api.com/v4/latest/MYR");
+        let data = await res.json();
+        rateGlobal = data.rates.IDR;
+    } catch {
+        rateGlobal = 3600; // fallback
+    }
+    document.getElementById("loading").style.display = "none";
+}
+fetchRate();
+
+function hitung() {
+    let rm = parseFloat(document.getElementById("rm").value);
+    let metode = document.getElementById("metode").value;
+    let fee = 0.03;
+
+    if (!rm) return alert("Masukkan jumlah RM!");
+
+    let rate = {
+        bank: 3.6,
+        tng: 3.6,
+        shopee: 3.5,
+        spesial: 3.7
+    }[metode];
+
+    let idr = rm * rate * 1000;
+    let potongan = idr * fee;
+    let total = idr - potongan;
+
+    document.getElementById("hasil").innerHTML = `
+        Rate Global: <b>${rateGlobal}</b><br>
+        Rate Dipakai: <b>${rate}</b><br>
+        Potongan (3%): <b>${Math.floor(potongan).toLocaleString()}</b><br>
+        Total IDR: <b>${Math.floor(total).toLocaleString()}</b>
+    `;
+}
+
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let rm = document.getElementById("rm").value;
+    if (!nama || !rm) return alert("Isi nama & jumlah RM dulu!");
+
+    let url = `https://wa.me/6281385371544?text=Halo%20Admin,%20saya%20${nama}%20ingin%20convert%20${rm}RM.`;
+    window.open(url, "_blank");
+}
+
+function toggleTheme() {
+    const body = document.body;
+    body.dataset.theme = body.dataset.theme === "light" ? "dark" : "light";
+}
+</script></body>
+</html>        </svg>
         <div>
           <div class="title">JASA EXCHANGE RM</div>
           <div class="small">Convert RM → IDR • Live Rate</div>
