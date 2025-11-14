@@ -3,265 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JASA EXCHANGE RM – Money Changer Pro</title>
-<!-- Google Font -->
+<title>JASA EXCHANGE RM</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
-:root {
-    --bg: #0b0c10;
-    --text: #f1f1f1;
-    --card: rgba(30,30,30,0.6);
-    --glass: rgba(40,40,40,0.2);
-    --primary: #4da3ff;
-    --accent: #00f2a5;
-    --shadow: rgba(0,0,0,0.5);
+:root{
+  --bg:#050607;
+  --text:#f1f1f1;
+  --card:rgba(17,20,24,0.6);
+  --glass:rgba(255,255,255,0.05);
+  --primary:#4da3ff;
+  --accent:#00f2a5;
+  --shadow:rgba(255,255,255,0.06);
 }
-body {
-    font-family: "Poppins", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    margin:0;
-    padding:20px;
-    overflow-x:hidden;
+
+/* Body & Fonts */
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  padding:20px;
+  overflow-x:hidden;
 }
-.navbar {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:12px 20px;
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border-radius: 18px;
-    margin-bottom:20px;
-    box-shadow:0 4px 20px var(--shadow);
+
+/* Navbar */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  border-radius:18px;
+  box-shadow:0 4px 20px var(--shadow);
+  margin-bottom:20px;
 }
-.nav-title {
-    font-size: 22px;
-    font-weight:700;
-    background: linear-gradient(90deg,#4da3ff,#00f2a5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.nav-title{font-size:20px;font-weight:600;}
+.toggle-btn{
+  padding:8px 14px;background:var(--primary);color:#fff;border-radius:12px;cursor:pointer;font-size:14px;
 }
-.toggle-btn {
-    padding: 8px 14px;
-    background: var(--primary);
-    color: white;
-    border-radius: 12px;
-    cursor:pointer;
-    font-size:14px;
+
+/* Header & Logo */
+.header{text-align:center;margin-bottom:20px;}
+.logo{
+  width:62px;height:62px;border-radius:16px;margin:auto;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;justify-content:center;align-items:center;
+  color:white;font-weight:800;font-size:26px;box-shadow:0 6px 18px var(--shadow);
+  animation:pop 0.5s ease;
 }
-.header{
-    text-align:center;
-    margin-bottom:20px;
+@keyframes pop{
+  0%{transform:scale(0.7);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
 }
-.logo {
-    width:70px; height:70px;
-    border-radius:20px;
-    margin:auto;
-    background: linear-gradient(135deg,var(--primary),var(--accent));
-    display:flex; justify-content:center; align-items:center;
-    color:white;
-    font-weight:800;
-    font-size:28px;
-    box-shadow:0 6px 18px var(--shadow);
-    animation: pop 0.5s ease;
+
+/* Container Card */
+.container{
+  max-width:480px;margin:auto;padding:25px;
+  background:var(--card);backdrop-filter:blur(15px);
+  border-radius:22px;box-shadow:0 4px 25px var(--shadow);
+  animation:fadeIn 0.5s ease;
 }
-@keyframes pop {0%{transform:scale(0.7);opacity:0;}100%{transform:scale(1);opacity:1;}}
-.container {
-    max-width:480px;
-    margin:auto;
-    padding:25px;
-    background: var(--card);
-    backdrop-filter: blur(15px);
-    border-radius:22px;
-    box-shadow:0 4px 25px var(--shadow);
-    animation: fadeIn 0.5s ease;
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
 }
-@keyframes fadeIn {from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-input, select {
-    width:100%; padding:14px; margin:10px 0; border:none; border-radius:14px;
-    background: rgba(255,255,255,0.1); color:white;
+input,select{width:100%;padding:14px;margin:10px 0;border:none;border-radius:14px;background:rgba(255,255,255,0.1);color:#fff;transition:0.3s;}
+button{
+  width:100%;padding:14px;margin-top:12px;background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;font-size:16px;border:none;border-radius:14px;cursor:pointer;transition:0.25s;box-shadow:0 3px 12px var(--shadow);
 }
-button {
-    width:100%; padding:14px; margin-top:12px;
-    background: linear-gradient(135deg,var(--primary),var(--accent));
-    color:white; font-size:16px; border:none; border-radius:14px; cursor:pointer;
-    transition:0.25s; box-shadow:0 3px 12px var(--shadow);
+button:hover{transform:scale(1.03);}
+
+/* Hasil Convert */
+#hasil{
+  padding:15px;margin-top:12px;background:var(--glass);border-radius:14px;
+  font-weight:500;box-shadow:inset 0 0 10px var(--shadow);
+  overflow:hidden;height:120px;display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;
 }
-button:hover {transform:scale(1.03); box-shadow:0 4px 16px var(--shadow);}
-#hasil {
-    padding:15px; margin-top:12px;
-    background: var(--glass); border-radius:14px; font-weight:500;
-    box-shadow: inset 0 0 10px var(--shadow);
+.animated-number{
+  position:relative;animation:riseUp 1s ease forwards;
 }
-#loading {display:none; text-align:center; padding:8px; animation: blink 1s infinite;}
-@keyframes blink {0%{opacity:0.3;}100%{opacity:1;}}
-footer {text-align:center; margin-top:30px; font-size:13px; opacity:0.6;}
-#bgSymbols {position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;}
-.symbol {position:absolute; color: rgba(255,255,255,0.05); font-size: 24px; animation: float 15s linear infinite;}
-@keyframes float {0%{transform:translateY(100vh);}100%{transform:translateY(-10vh);}}
-.benefits-container{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:30px;}
-.benefit-card{padding:15px;border-radius:15px;background:linear-gradient(135deg,#4da3ff,#00f2a5);text-align:center;font-weight:600;animation:popIn 0.8s ease;}
-@keyframes popIn{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
-.testi-section{margin-top:40px;padding:20px;background:rgba(0,0,0,0.2);border-radius:20px;}
+@keyframes riseUp{
+  0%{transform:translateY(50px);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
+}
+
+/* Running ticker */
+.running-ticker{
+  margin-top:30px;padding:10px;background:linear-gradient(90deg,#00d4ff,#0095ff);
+  color:white;border-radius:10px;overflow:hidden;font-weight:bold;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+  from{box-shadow:0 0 5px #00d4ff;}
+  to{box-shadow:0 0 18px #0095ff;}
+}
+.running-ticker span{
+  animation:tickerMove 12s linear infinite;white-space:nowrap;display:inline-block;
+}
+@keyframes tickerMove{
+  from{transform:translateX(100%);}
+  to{transform:translateX(-100%);}
+}
+
+/* Footer & Others */
+.footer{text-align:center;margin-top:22px;font-size:13px;opacity:0.6;}
+.testi-section{margin-top:40px;padding:20px;background:rgba(255,255,255,0.15);border-radius:20px;backdrop-filter:blur(10px);}
 .testi-section h3{margin-bottom:10px;font-weight:700;}
-.testi-card{padding:12px;margin:8px 0;border-radius:12px;background:rgba(0,0,0,0.3);color:white;}
-.running-ticker{margin-top:30px;padding:10px;background:linear-gradient(90deg,#00d4ff,#0095ff);color:white;border-radius:10px;overflow:hidden;font-weight:bold;animation:glow 2s infinite alternate;}
-@keyframes glow{from{box-shadow:0 0 5px #00d4ff;}to{box-shadow:0 0 18px #0095ff;}}
-.running-ticker span{animation:tickerMove 12s linear infinite;white-space:nowrap;display:inline-block;}
-@keyframes tickerMove{from{transform:translateX(100%);}to{transform:translateX(-100%);}}
+.testi-card{padding:12px;margin:8px 0;border-radius:12px;background:rgba(0,0,0,0.2);color:white;}
+
+/* Mini chart placeholder */
+.mini-chart{margin-top:40px;padding:20px;border-radius:20px;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);box-shadow:0 8px 25px rgba(0,0,0,0.1);}
 </style>
 </head>
 <body>
-<div id="bgSymbols"></div>
-
 <div class="navbar">
-    <div class="nav-title">Money Changer Pro</div>
-    <div class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</div>
+  <div class="nav-title">Money Changer Pro</div>
+  <div class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</div>
 </div>
 
 <div class="header">
-    <div class="logo">RM</div>
-    <h2 style="margin-top:10px;">JASA EXCHANGE RM</h2>
-    <small>Live Rate • Trusted Service</small>
+  <div class="logo">RM</div>
+  <h2 style="margin-top:10px;">JASA EXCHANGE RM</h2>
+  <small>Live Rate • Trusted Service</small>
 </div>
 
 <div class="container">
-    <label>Nama Pengirim</label>
-    <input type="text" id="nama" placeholder="Masukkan nama Anda">
-    <label>Jumlah RM</label>
-    <input type="number" id="rm" placeholder="Masukkan jumlah RM">
-
-    <label>Metode</label>
-    <select id="metode">
-        <option value="bank">Bank</option>
-        <option value="tng">TNG</option>
-        <option value="shopee">Shopee</option>
-        <option value="spesial">Spesial > RM2000</option>
-    </select>
-
-    <div id="loading">Mengambil rate global...</div>
-
-    <button onclick="hitung()">Hitung IDR</button>
-
-    <h3>Hasil:</h3>
-    <div id="hasil">-</div>
-
-    <label>Bukti Transfer (Opsional)</label>
-    <input type="file" id="bukti" accept="image/*">
-
-    <button onclick="kirimWA()">Chat Admin</button>
-
-    <h3>Mini Chart RM → IDR</h3>
-    <canvas id="rateChart" height="150"></canvas>
-
-    <div class="running-ticker"><span id="tickerText">Loading realtime RM/IDR rate...</span></div>
-
-    <div class="benefits-container">
-        <div class="benefit-card">⚡ Proses Cepat</div>
-        <div class="benefit-card">🛡 Aman Terpercaya</div>
-        <div class="benefit-card">💰 Rate Kompetitif</div>
-        <div class="benefit-card">📞 Support 24 Jam</div>
-    </div>
-
-    <div class="testi-section">
-        <h3>Apa Kata Pelanggan?</h3>
-        <div class="testi-card">“Proses cepat, rate bagus! Langganan terus.” — Andi</div>
-        <div class="testi-card">“Admin responsif, aman terpercaya.” — Nurul</div>
-        <div class="testi-card">“Rekomendasi banget buat convert RM.” — Hafiz</div>
-    </div>
+  <label>Nama Pengirim</label>
+  <input type="text" id="nama" placeholder="Masukkan nama Anda">
+  <label>Jumlah RM</label>
+  <input type="number" id="rm" placeholder="Masukkan jumlah RM">
+  <label>Metode</label>
+  <select id="metode">
+    <option value="bank">Bank</option>
+    <option value="tng">TNG</option>
+    <option value="shopee">Shopee</option>
+    <option value="spesial">Spesial > RM2000</option>
+  </select>
+  <div id="loading">Mengambil rate global...</div>
+  <button onclick="hitung()">Hitung IDR</button>
+  <h3>Hasil:</h3>
+  <div id="hasil">-</div>
+  <button onclick="kirimWA()">Chat Admin</button>
 </div>
 
-<footer>© 2025 Jasa Exchange RM – All Rights Reserved</footer>
+<div class="running-ticker"><span id="tickerText">Loading realtime RM/IDR rate...</span></div>
+<div class="mini-chart">
+  <h3>Pergerakan RM/IDR Hari Ini</h3>
+  <canvas id="rateChart"></canvas>
+</div>
+<div class="testi-section">
+  <h3>Apa Kata Pelanggan?</h3>
+  <div class="testi-card">“Proses cepat, rate bagus! Langganan terus.” — Andi</div>
+  <div class="testi-card">“Admin responsif, aman terpercaya.” — Nurul</div>
+  <div class="testi-card">“Rekomendasi banget buat convert RM.” — Hafiz</div>
+</div>
+<div class="footer">© 2025 Jasa Exchange RM – All Rights Reserved</div>
 
 <script>
 let rateGlobal=0;
-const bg=document.getElementById("bgSymbols");
-const symbols=["💵","💴","💰","💸","🪙"];
-for(let i=0;i<30;i++){
-    let span=document.createElement("span");
-    span.className="symbol";
-    span.style.left=Math.random()*100+"%";
-    span.style.fontSize=(20+Math.random()*30)+"px";
-    span.style.animationDuration=(10+Math.random()*10)+"s";
-    span.innerText=symbols[Math.floor(Math.random()*symbols.length)];
-    bg.appendChild(span);
-}
-
 async function fetchRate(){
-    document.getElementById("loading").style.display="block";
-    try{
-        let res=await fetch("https://api.exchangerate-api.com/v4/latest/MYR");
-        let data=await res.json();
-        rateGlobal=data.rates.IDR;
-        document.getElementById("tickerText").innerText=`Live Rate RM/IDR: ${rateGlobal}`;
-    }catch{
-        rateGlobal=3600;
-        document.getElementById("tickerText").innerText=`Rate RM/IDR default: ${rateGlobal}`;
-    }
-    document.getElementById("loading").style.display="none";
+  document.getElementById("loading").style.display="block";
+  try{
+    let res=await fetch("https://api.exchangerate-api.com/v4/latest/MYR");
+    let data=await res.json();
+    rateGlobal=data.rates.IDR;
+  }catch{
+    rateGlobal=3600;
+  }
+  document.getElementById("loading").style.display="none";
 }
 fetchRate();
 
 function hitung(){
-    let rm=parseFloat(document.getElementById("rm").value);
-    let metode=document.getElementById("metode").value;
-    if(!rm) return alert("Masukkan jumlah RM!");
+  let rm=parseFloat(document.getElementById("rm").value);
+  let metode=document.getElementById("metode").value;
+  if(!rm) return alert("Masukkan jumlah RM!");
 
-    let feePerc=0;
-    if(rm>=1 && rm<=999) feePerc=0.025;
-    else if(rm>=1000 && rm<=4999) feePerc=0.02;
-    else if(rm>=5000 && rm<=10000) feePerc=0.012;
+  let feePerc=0;
+  if(rm>=1 && rm<=999) feePerc=0.025;
+  else if(rm>=1000 && rm<=4999) feePerc=0.02;
+  else if(rm>=5000 && rm<=10000) feePerc=0.012;
 
-    let rate={bank:3.6,tng:3.6,shopee:3.5,spesial:3.7}[metode];
+  let rate={bank:3.6,tng:3.6,shopee:3.5,spesial:3.7}[metode];
 
-    let idr=rm*rate*1000;
-    let fee=idr*feePerc;
-    let total=idr-fee;
+  let idr=rm*rate*1000;
+  let fee=idr*feePerc;
+  let total=idr-fee;
 
-    document.getElementById("hasil").innerHTML=`
-        <b>Live Global Rate:</b> ${rateGlobal}<br>
-        <b>Rate Dipakai:</b> ${rate}<br>
-        <b>Fee ${(feePerc*100).toFixed(1)}%:</b> ${Math.floor(fee).toLocaleString()}<br><br>
-        <b style="font-size:20px">Total IDR:</b><br>
-        <span style="font-size:26px;color:var(--primary);font-weight:700;">${Math.floor(total).toLocaleString()}</span>
-    `;
+  let hasilDiv=document.getElementById("hasil");
+  hasilDiv.innerHTML='';
+  
+  let text=document.createElement("div");
+  text.className="animated-number";
+  
+  // animated counter naik
+  let start=0;
+  let duration=1000;
+  let stepTime=20;
+  let steps=Math.ceil(duration/stepTime);
+  let increment=Math.floor(total/steps);
+  let current=start;
+  
+  text.innerHTML=`<b>Live Global Rate:</b> ${rateGlobal}<br>
+  <b>Rate Dipakai:</b> ${rate}<br>
+  <b>Fee ${(feePerc*100).toFixed(1)}%:</b> ${Math.floor(fee).toLocaleString()}<br><br>
+  <b style="font-size:20px">Total IDR:</b><br>
+  <span id="counter" style="font-size:26px;color:var(--primary);font-weight:700;">0</span>`;
+  hasilDiv.appendChild(text);
 
-    updateChart(total);
+  let counterSpan=document.getElementById("counter");
+  let i=0;
+  let interval=setInterval(()=>{
+    current+=increment;
+    if(i>=steps){current=total; clearInterval(interval);}
+    counterSpan.innerText=Math.floor(current).toLocaleString();
+    i++;
+  },stepTime);
 }
 
 function kirimWA(){
-    let nama=document.getElementById("nama").value;
-    let rm=document.getElementById("rm").value;
-    let metode=document.getElementById("metode").value;
-    let hasil=document.getElementById("hasil").innerText;
-    let fileInput=document.getElementById("bukti");
-
-    if(!nama||!rm) return alert("Isi nama & jumlah RM dulu!");
-
-    let text=`Halo Admin, saya ${nama} ingin convert ${rm}RM via ${metode}.\nHasil IDR:\n${hasil}\n`;
-    if(fileInput.files.length>0) text+="(Bukti transfer sudah diunggah)";
-
-    let url=`https://wa.me/6281385371544?text=${encodeURIComponent(text)}`;
-    window.open(url,"_blank");
+  let nama=document.getElementById("nama").value;
+  let rm=document.getElementById("rm").value;
+  if(!nama||!rm) return alert("Isi nama & jumlah RM dulu!");
+  let url=`https://wa.me/6281385371544?text=Halo%20Admin,%20saya%20${nama}%20ingin%20convert%20${rm}RM.`;
+  window.open(url,"_blank");
 }
 
-function toggleTheme(){}
-
-const ctx=document.getElementById("rateChart").getContext("2d");
-const chart=new Chart(ctx,{
-    type:'line',
-    data:{labels:[],datasets:[{label:'Total IDR',data:[],borderColor:'rgba(77,163,255,1)',backgroundColor:'rgba(0,242,165,0.2)',tension:0.3,fill:true}]},
-    options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{display:false},y:{beginAtZero:true}}}
-});
-function updateChart(total){
-    const now=new Date();
-    let label=`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    chart.data.labels.push(label);
-    chart.data.datasets[0].data.push(total);
-    if(chart.data.labels.length>20){chart.data.labels.shift(); chart.data.datasets[0].data.shift();}
-    chart.update();
+function toggleTheme(){
+  const body=document.body;
+  body.dataset.theme=body.dataset.theme==="light"?"dark":"light";
 }
 </script>
 </body>
