@@ -2,71 +2,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JASA EXCHANGE RM</title>
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #111111;
-            --card: #f2f2f2;
-        }
-        [data-theme="dark"] {
-            --bg: #0d0d0d;
-            --text: #ffffff;
-            --card: #1a1a1a;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            transition: 0.3s;
-        }
-        .container {
-            max-width: 450px;
-            margin: auto;
-            padding: 20px;
-            background: var(--card);
-            border-radius: 15px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        .toggle-btn {
-            float: right;
-            margin-bottom: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 8px;
-            background: #007bff;
-            color: #fff;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-        #loading {
-            display: none;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-        }
-    </style>
+    <title>JASA EXCHANGE RM</title><!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #ffffff;
+        --text: #0b0d0f;
+        --card: rgba(255,255,255,0.6);
+        --glass: rgba(255,255,255,0.2);
+        --primary: #0d6efd;
+        --accent: #00d68f;
+        --shadow: rgba(0,0,0,0.08);
+    }
+    [data-theme="dark"] {
+        --bg: #050607;
+        --text: #f1f1f1;
+        --card: rgba(17,20,24,0.6);
+        --glass: rgba(255,255,255,0.05);
+        --primary: #4da3ff;
+        --accent: #00f2a5;
+        --shadow: rgba(255,255,255,0.06);
+    }
+
+    body {
+        font-family: "Poppins", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        transition: 0.4s ease;
+    }
+
+    /* Navigation */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 20px;
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px var(--shadow);
+        border-radius: 18px;
+        margin-bottom: 20px;
+    }
+
+    .nav-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .toggle-btn {
+        padding: 8px 14px;
+        background: var(--primary);
+        color: white;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    /* Logo */
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .logo {
+        width: 62px;
+        height: 62px;
+        border-radius: 16px;
+        margin: auto;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: 800;
+        font-size: 26px;
+        box-shadow: 0 6px 18px var(--shadow);
+        animation: pop 0.5s ease;
+    }
+    @keyframes pop {
+        0% { transform: scale(0.7); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Card */
+    .container {
+        max-width: 480px;
+        margin: auto;
+        padding: 25px;
+        background: var(--card);
+        backdrop-filter: blur(15px);
+        border-radius: 22px;
+        box-shadow: 0 4px 25px var(--shadow);
+        animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    input, select {
+        width: 100%;
+        padding: 14px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.8);
+        transition: 0.3s;
+    }
+    [data-theme="dark"] input,
+    [data-theme="dark"] select {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        margin-top: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: 0.25s;
+        box-shadow: 0 3px 12px var(--shadow);
+    }
+    button:hover {
+        transform: scale(1.03);
+    }
+
+    #hasil {
+        padding: 15px;
+        margin-top: 12px;
+        background: var(--glass);
+        border-radius: 14px;
+        font-weight: 500;
+        box-shadow: inset 0 0 5px var(--shadow);
+    }
+
+    #loading {
+        display: none;
+        text-align: center;
+        padding: 8px;
+        animation: blink 1s infinite;
+    }
+    @keyframes blink {
+        0% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 22px;
+        font-size: 13px;
+        opacity: 0.6;
+    }
+</style>
+
 </head>
-<body data-theme="light"><div class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</div>
-<h2 style="text-align:center;">JASA EXCHANGE RM</h2><div class="container">
+<body data-theme="light"><!-- NAVBAR --><div class="navbar">
+    <div class="nav-title">Money Changer Pro</div>
+    <div class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</div>
+</div><!-- HEADER + LOGO --><div class="header">
+    <div class="logo">RM</div>
+    <h2 style="margin-top: 10px;">JASA EXCHANGE RM</h2>
+    <small>Live Rate • Trusted Service</small>
+</div><!-- MAIN CARD --><div class="container">
     <label>Nama Pengirim</label>
     <input type="text" id="nama" placeholder="Masukkan nama Anda"><label>Jumlah RM</label>
 <input type="number" id="rm" placeholder="Masukkan jumlah RM">
@@ -88,7 +192,7 @@
 
 <button onclick="kirimWA()">Chat Admin</button>
 
-</div><script>
+</div><div class="footer">© 2025 Jasa Exchange RM – All Rights Reserved</div><script>
 let rateGlobal = 0;
 
 async function fetchRate() {
@@ -98,7 +202,7 @@ async function fetchRate() {
         let data = await res.json();
         rateGlobal = data.rates.IDR;
     } catch {
-        rateGlobal = 3600; // fallback
+        rateGlobal = 3600;
     }
     document.getElementById("loading").style.display = "none";
 }
@@ -123,10 +227,11 @@ function hitung() {
     let total = idr - potongan;
 
     document.getElementById("hasil").innerHTML = `
-        Rate Global: <b>${rateGlobal}</b><br>
-        Rate Dipakai: <b>${rate}</b><br>
-        Potongan (3%): <b>${Math.floor(potongan).toLocaleString()}</b><br>
-        Total IDR: <b>${Math.floor(total).toLocaleString()}</b>
+        <b>Live Global Rate:</b> ${rateGlobal}<br>
+        <b>Rate Dipakai:</b> ${rate}<br>
+        <b>Fee 3%:</b> ${Math.floor(potongan).toLocaleString()}<br><br>
+        <b style="font-size:20px">Total IDR:</b><br>
+        <span style="font-size:26px;color:var(--primary);font-weight:700;">${Math.floor(total).toLocaleString()}</span>
     `;
 }
 
@@ -144,456 +249,4 @@ function toggleTheme() {
     body.dataset.theme = body.dataset.theme === "light" ? "dark" : "light";
 }
 </script></body>
-</html>        </svg>
-        <div>
-          <div class="title">JASA EXCHANGE RM</div>
-          <div class="small">Convert RM → IDR • Live Rate</div>
-        </div>
-      </div>
-
-      <div style="text-align:right">
-        <div class="small">Global rate:</div>
-        <div id="globalRate" class="small muted">memuat...</div>
-        <div style="margin-top:6px">
-          <button id="refreshRate" class="chip">Refresh Rate</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- inputs -->
-    <div class="field">
-      <label class="small">Jumlah RM</label>
-      <input id="rmInput" type="number" min="0" step="1" placeholder="Contoh: 1000"/>
-    </div>
-
-    <div style="margin-top:10px">
-      <div class="small">Pilih Metode</div>
-      <div class="methods" id="methods">
-        <!-- JS generates method cards -->
-      </div>
-      <div class="small muted" style="margin-top:8px">Spesial aktif untuk jumlah ≥ 2000 RM</div>
-    </div>
-
-    <div style="margin-top:12px">
-      <div class="small">Fee Admin</div>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <div id="feePercent" class="chip">5% (persen)</div>
-        <div id="feeFixed" class="chip">10 RM (tetap)</div>
-      </div>
-      <div class="small muted" style="margin-top:8px">Keduanya aktif sesuai setelan.</div>
-    </div>
-
-    <div class="loading" id="loading">
-      <div class="loader"></div>
-      <div class="small muted">Mengambil data & menghitung...</div>
-    </div>
-
-    <div class="result neon" id="resultBox" style="display:none">
-      <div class="sub">Hasil Perhitungan</div>
-      <div id="resultMain" class="big">—</div>
-      <div id="breakdown" class="sub">—</div>
-
-      <div style="display:flex;gap:8px;margin-top:12px">
-        <button id="copyBtn" class="btn btn-ghost">Salin</button>
-        <a id="waBtn" class="btn btn-primary" target="_blank" rel="noopener">Kirim ke WhatsApp</a>
-        <button id="openHistory" class="btn btn-ghost">Riwayat</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT: SETTINGS -->
-  <div class="card summary">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="small">Pengaturan Rate Pribadi</div>
-      <div class="small muted">(3.6 → Rp 3.600)</div>
-    </div>
-
-    <div class="field">
-      <label class="small">Bank</label>
-      <input id="rateBank" type="text" inputmode="decimal" placeholder="3.6"/>
-    </div>
-    <div class="field">
-      <label class="small">TNG</label>
-      <input id="rateTNG" type="text" inputmode="decimal" placeholder="3.6"/>
-    </div>
-    <div class="field">
-      <label class="small">Shopee</label>
-      <input id="rateShopee" type="text" inputmode="decimal" placeholder="3.5"/>
-    </div>
-    <div class="field">
-      <label class="small">Spesial (≥2000 RM)</label>
-      <input id="rateSpesial" type="text" inputmode="decimal" placeholder="3.7"/>
-    </div>
-
-    <div style="display:flex;gap:8px;margin-top:12px">
-      <button id="saveRates" class="btn btn-primary">Simpan Rate</button>
-      <button id="resetRates" class="btn btn-ghost">Reset</button>
-    </div>
-
-    <div style="margin-top:12px" class="small muted">
-      Auto-refresh rate tiap 5 menit. Global rate dipakai jika custom rate kosong.
-    </div>
-  </div>
-</div>
-
-<!-- Floating chat admin -->
-<div class="chat-admin" onclick="window.open('https://wa.me/6281385371544','_blank')">Chat Admin</div>
-
-<!-- Modal History -->
-<div class="modal-bg" id="modalBg">
-  <div class="modal">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3 style="margin:0">Riwayat Perhitungan</h3>
-      <div style="display:flex;gap:8px">
-        <button id="exportCSV" class="chip">Export CSV</button>
-        <button id="clearHistory" class="chip">Hapus</button>
-        <button id="closeModal" class="chip">Tutup</button>
-      </div>
-    </div>
-    <div id="historyList" style="margin-top:12px"></div>
-  </div>
-</div>
-
-<script>
-/* ---------- Config & State ---------- */
-const WA_NUMBER = "6281385371544";
-const GLOBAL_API = "https://api.exchangerate.host/latest?base=MYR&symbols=IDR";
-const LS_RATES = "je_rates_v1";
-const LS_HISTORY = "je_hist_v1";
-const AUTO_REFRESH_MS = 5 * 60 * 1000; // 5 minutes
-
-let state = {
-  globalRate: null,
-  lastUpdated: null,
-  selectedMethod: "bank",
-  fees: { percent: true, fixed: true },
-  percentVal: 5.0,
-  fixedRM: 10,
-  customRates: { bank:3.6, tng:3.6, shopee:3.5, spesial:3.7 }
-};
-
-/* ---------- UI Refs ---------- */
-const methodsEl = document.getElementById("methods");
-const rmInput = document.getElementById("rmInput");
-const loadingEl = document.getElementById("loading");
-const resultBox = document.getElementById("resultBox");
-const resultMain = document.getElementById("resultMain");
-const breakdownEl = document.getElementById("breakdown");
-const globalRateEl = document.getElementById("globalRate");
-const refreshRateBtn = document.getElementById("refreshRate");
-const saveRatesBtn = document.getElementById("saveRates");
-const resetRatesBtn = document.getElementById("resetRates");
-const rateBank = document.getElementById("rateBank");
-const rateTNG = document.getElementById("rateTNG");
-const rateShopee = document.getElementById("rateShopee");
-const rateSpesial = document.getElementById("rateSpesial");
-const feePercentBtn = document.getElementById("feePercent");
-const feeFixedBtn = document.getElementById("feeFixed");
-const waBtn = document.getElementById("waBtn");
-const copyBtn = document.getElementById("copyBtn");
-const modalBg = document.getElementById("modalBg");
-const historyList = document.getElementById("historyList");
-const openHistoryBtn = document.getElementById("openHistory");
-const closeModalBtn = document.getElementById("closeModal");
-const clearHistoryBtn = document.getElementById("clearHistory");
-const exportCSVBtn = document.getElementById("exportCSV");
-
-/* ---------- Initialization ---------- */
-(function init(){
-  // load saved custom rates
-  const saved = localStorage.getItem(LS_RATES);
-  if(saved){ try { state.customRates = JSON.parse(saved); } catch(e){} }
-  rateBank.value = state.customRates.bank;
-  rateTNG.value = state.customRates.tng;
-  rateShopee.value = state.customRates.shopee;
-  rateSpesial.value = state.customRates.spesial;
-
-  // initialize fee buttons active look
-  feePercentBtn.classList.add("active");
-  feeFixedBtn.classList.add("active");
-
-  // build method cards
-  buildMethodCards();
-
-  // events
-  refreshRateBtn.addEventListener("click", fetchGlobalRate);
-  saveRatesBtn.addEventListener("click", saveRates);
-  resetRatesBtn.addEventListener("click", resetRates);
-  feePercentBtn.addEventListener("click", toggleFeePercent);
-  feeFixedBtn.addEventListener("click", toggleFeeFixed);
-  rmInput.addEventListener("input", debounce(computeAndRender, 500));
-  copyBtn.addEventListener("click", copyResult);
-  openHistoryBtn.addEventListener("click", openHistory);
-  closeModalBtn.addEventListener("click", closeHistory);
-  clearHistoryBtn.addEventListener("click", clearHistory);
-  exportCSVBtn.addEventListener("click", exportHistoryCSV);
-
-  // initial fetch
-  fetchGlobalRate();
-  // auto refresh timer
-  setInterval(fetchGlobalRate, AUTO_REFRESH_MS);
-  // render history
-  renderHistory();
-})();
-
-/* ---------- Methods UI ---------- */
-function buildMethodCards(){
-  const items = [
-    {id:"bank", label:"Bank"},
-    {id:"tng", label:"TNG"},
-    {id:"shopee", label:"ShopeePay"},
-    {id:"spesial", label:"Spesial (≥2000 RM)"}
-  ];
-  methodsEl.innerHTML = "";
-  items.forEach(it=>{
-    const el = document.createElement("div");
-    el.className = "method";
-    el.id = "method_"+it.id;
-    el.innerHTML = `<div style="font-weight:700">${it.label}</div><div class="small muted" id="rate_label_${it.id}">—</div>`;
-    el.addEventListener("click", ()=>{
-      // if spesial but amount < 2000, do nothing
-      const rm = Number(rmInput.value || 0);
-      if(it.id === "spesial" && rm < 2000){
-        // minor shake animation
-        el.classList.add("disabled");
-        setTimeout(()=>el.classList.remove("disabled"),400);
-        return;
-      }
-      document.querySelectorAll(".method").forEach(m=>m.classList.remove("active"));
-      el.classList.add("active");
-      state.selectedMethod = it.id;
-      computeAndRender();
-    });
-    methodsEl.appendChild(el);
-  });
-  // set default active
-  document.getElementById("method_bank").classList.add("active");
-  state.selectedMethod = "bank";
-  updateMethodLabels();
-}
-
-/* ---------- Fetch Global Rate ---------- */
-async function fetchGlobalRate(){
-  globalRateEl.textContent = "memuat...";
-  try{
-    const res = await fetch(GLOBAL_API);
-    const data = await res.json();
-    if(data && data.rates && data.rates.IDR){
-      state.globalRate = Number(data.rates.IDR);
-      state.lastUpdated = new Date().toISOString();
-      globalRateEl.textContent = `1 MYR = Rp ${Math.round(state.globalRate).toLocaleString('id-ID')} (updated: ${new Date(state.lastUpdated).toLocaleString()})`;
-    } else {
-      globalRateEl.textContent = "Gagal ambil rate global";
-    }
-  }catch(err){
-    globalRateEl.textContent = "Gagal ambil rate global";
-  }
-  updateMethodLabels();
-  computeAndRender();
-}
-
-/* ---------- Helpers ---------- */
-function parseRateInput(v, fallback){ if(v==null||v==="") return fallback; const n = Number(String(v).replace(',','.')); return isNaN(n)?fallback:n; }
-function saveRates(){
-  state.customRates.bank = parseRateInput(rateBank.value, state.customRates.bank);
-  state.customRates.tng = parseRateInput(rateTNG.value, state.customRates.tng);
-  state.customRates.shopee = parseRateInput(rateShopee.value, state.customRates.shopee);
-  state.customRates.spesial = parseRateInput(rateSpesial.value, state.customRates.spesial);
-  localStorage.setItem(LS_RATES, JSON.stringify(state.customRates));
-  updateMethodLabels();
-  computeAndRender();
-  alert("Rate tersimpan.");
-}
-function resetRates(){
-  state.customRates = { bank:3.6, tng:3.6, shopee:3.5, spesial:3.7 };
-  rateBank.value = state.customRates.bank;
-  rateTNG.value = state.customRates.tng;
-  rateShopee.value = state.customRates.shopee;
-  rateSpesial.value = state.customRates.spesial;
-  localStorage.setItem(LS_RATES, JSON.stringify(state.customRates));
-  updateMethodLabels();
-  computeAndRender();
-  alert("Rate dikembalikan ke default.");
-}
-function toggleFeePercent(){ state.fees.percent = !state.fees.percent; feePercentBtn.classList.toggle("active", state.fees.percent); computeAndRender(); }
-function toggleFeeFixed(){ state.fees.fixed = !state.fees.fixed; feeFixedBtn.classList.toggle("active", state.fees.fixed); computeAndRender(); }
-function debounce(fn, t){ let timer; return (...a)=>{ clearTimeout(timer); timer=setTimeout(()=>fn(...a), t); }; }
-
-/* ---------- Rate selection (custom if present else global) ---------- */
-function getRateForMethod(method, rmAmount){
-  // if custom exists and valid -> use it (3.6 => 3600)
-  const cr = state.customRates[method];
-  const parsed = parseFloat(cr);
-  if(isFinite(parsed) && parsed>0) return Math.round(parsed * 1000);
-  // fallback to global
-  if(state.globalRate) return Math.round(state.globalRate);
-  return null;
-}
-
-function updateMethodLabels(){
-  ["bank","tng","shopee","spesial"].forEach(k=>{
-    const lbl = document.getElementById("rate_label_"+k);
-    if(!lbl) return;
-    const cr = state.customRates[k];
-    if(cr){
-      const rp = Math.round(Number(cr)*1000);
-      lbl.textContent = `custom: Rp ${rp.toLocaleString('id-ID')}`;
-    } else if(state.globalRate){
-      lbl.textContent = `global: Rp ${Math.round(state.globalRate).toLocaleString('id-ID')}`;
-    } else {
-      lbl.textContent = "—";
-    }
-  });
-}
-
-/* ---------- Compute & Render ---------- */
-function showLoading(on=true){
-  loadingEl.style.display = on ? "block" : "none";
-}
-function computeAndRender(){
-  const rm = Number(rmInput.value || 0);
-  updateMethodLabels();
-
-  // if no input
-  if(!rm || rm <= 0){
-    resultBox.style.display = "none";
-    return;
-  }
-
-  // check selected method and special rule
-  if(state.selectedMethod === "spesial" && rm < 2000){
-    // force switch to bank if spesial invalid
-    document.getElementById("method_spesial").classList.remove("active");
-    document.getElementById("method_bank").classList.add("active");
-    state.selectedMethod = "bank";
-  }
-
-  // determine used rate (IDR per RM)
-  let usedRate = getRateForMethod(state.selectedMethod, rm);
-  let rateSource = (state.customRates[state.selectedMethod]) ? "Custom" : "Global";
-  if(!usedRate){
-    resultBox.style.display = "none";
-    return;
-  }
-
-  // basic base idr
-  const baseIdr = rm * usedRate;
-
-  // fees
-  const percentAmount = state.fees.percent ? (state.percentVal/100) * baseIdr : 0;
-  const fixedAmount = state.fees.fixed ? (state.fixedRM * usedRate) : 0;
-  let totalFee = 0;
-  if(state.fees.percent && state.fees.fixed) totalFee = percentAmount + fixedAmount;
-  else if(state.fees.percent) totalFee = percentAmount;
-  else if(state.fees.fixed) totalFee = fixedAmount;
-
-  const final = Math.max(0, baseIdr - totalFee);
-
-  // render
-  resultBox.style.display = "block";
-  resultMain.textContent = `≈ Rp ${Math.round(final).toLocaleString('id-ID')}`;
-  breakdownEl.innerHTML = `
-    <div class="sub">Rate: ${rateSource} — Rp ${usedRate.toLocaleString('id-ID')} per RM</div>
-    <div class="sub small">Base: Rp ${Math.round(baseIdr).toLocaleString('id-ID')} • Fee: Rp ${Math.round(totalFee).toLocaleString('id-ID')}</div>
-  `;
-
-  // prepare WA link and copy text
-  const text = `Halo, saya ingin convert ${rm} RM.\nMetode: ${state.selectedMethod}\nRate: Rp ${usedRate.toLocaleString('id-ID')} per RM\nFee: Rp ${Math.round(totalFee).toLocaleString('id-ID')}\nTotal diterima: Rp ${Math.round(final).toLocaleString('id-ID')}\nTolong diproses ya.`;
-  waBtn.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-
-  // save to history
-  addHistory({ ts:new Date().toISOString(), rm, method:state.selectedMethod, rateUsed:usedRate, base:Math.round(baseIdr), fee:Math.round(totalFee), final:Math.round(final) });
-}
-
-/* ---------- History ---------- */
-function addHistory(entry){
-  try{
-    const raw = localStorage.getItem(LS_HISTORY);
-    const arr = raw ? JSON.parse(raw) : [];
-    arr.unshift(entry);
-    if(arr.length>300) arr.splice(300);
-    localStorage.setItem(LS_HISTORY, JSON.stringify(arr));
-    renderHistory();
-  }catch(e){}
-}
-function renderHistory(){
-  const raw = localStorage.getItem(LS_HISTORY);
-  const arr = raw ? JSON.parse(raw) : [];
-  historyList.innerHTML = "";
-  if(arr.length===0){ historyList.innerHTML = "<div class='small muted'>Belum ada riwayat.</div>"; return; }
-  arr.slice(0,200).forEach(h=>{
-    const d = document.createElement("div");
-    d.className = "history-item";
-    d.innerHTML = `<div>
-      <div style="font-weight:700">RM ${h.rm} → Rp ${h.final.toLocaleString('id-ID')}</div>
-      <div class="small muted">Method: ${h.method} • Rate: Rp ${h.rateUsed.toLocaleString('id-ID')}</div>
-      <div class="small muted">${new Date(h.ts).toLocaleString()}</div>
-    </div>
-    <div style="text-align:right">
-      <div class="small muted">Fee: Rp ${h.fee.toLocaleString('id-ID')}</div>
-      <div style="margin-top:6px"><button class="chip" onclick='replay("${h.ts}")'>Pakai</button></div>
-    </div>`;
-    historyList.appendChild(d);
-  });
-}
-function replay(ts){
-  const raw = localStorage.getItem(LS_HISTORY);
-  const arr = raw ? JSON.parse(raw) : [];
-  const item = arr.find(x=>x.ts===ts);
-  if(!item) return;
-  rmInput.value = item.rm;
-  document.querySelectorAll(".method").forEach(m=>m.classList.remove("active"));
-  const el = document.getElementById("method_"+item.method);
-  if(el) el.classList.add("active");
-  state.selectedMethod = item.method;
-  computeAndRender();
-}
-function openHistory(){ modalBg.style.display = "flex"; }
-function closeHistory(){ modalBg.style.display = "none"; }
-function clearHistory(){ if(!confirm("Hapus semua riwayat?")) return; localStorage.removeItem(LS_HISTORY); renderHistory(); alert("Riwayat dihapus."); }
-
-/* ---------- Export CSV ---------- */
-function exportHistoryCSV(){
-  const raw = localStorage.getItem(LS_HISTORY);
-  const arr = raw ? JSON.parse(raw) : [];
-  if(!arr || arr.length===0){ alert("Tidak ada riwayat untuk diexport."); return; }
-  const header = ["timestamp","rm","method","rate_used_idr","base_idr","fee_idr","final_idr"];
-  const rows = arr.map(r=>[r.ts,r.rm,r.method,r.rateUsed,r.base,r.fee,r.final]);
-  const csv = [header, ...rows].map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(",")).join("\n");
-  const blob = new Blob([csv], {type:'text/csv'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `history_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.csv`;
-  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-}
-
-/* ---------- Copy ---------- */
-function copyResult(){
-  const text = resultMain.textContent + "\n" + (breakdownEl.textContent || "");
-  navigator.clipboard?.writeText(text).then(()=> alert("Hasil disalin"), ()=> alert("Gagal menyalin"));
-}
-
-/* ---------- Misc UI wiring ---------- */
-document.getElementById("refreshRate").addEventListener("click", ()=>{ fetchGlobalRate(); });
-document.getElementById("saveRates").addEventListener("click", saveRates);
-document.getElementById("resetRates").addEventListener("click", resetRates);
-document.getElementById("feePercent").addEventListener("click", ()=>{ toggleFeePercent(); });
-document.getElementById("feeFixed").addEventListener("click", ()=>{ toggleFeeFixed(); });
-
-/* ---------- Auto compute after fetch ---------- */
-async function computeAndRenderWithLoading(){
-  showLoading(true);
-  try{ await fetchGlobalRate(); } catch(e){}
-  showLoading(false);
-  computeAndRender();
-}
-function showLoading(flag){ loadingEl.style.display = flag ? "block" : "none"; }
-
-/* ---------- initial compute handler ---------- */
-rmInput.addEventListener("change", computeAndRender);
-rmInput.addEventListener("input", debounce(computeAndRender, 400));
-
-</script>
-</body>
 </html>
