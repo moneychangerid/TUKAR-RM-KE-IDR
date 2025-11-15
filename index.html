@@ -168,21 +168,24 @@ const rate = {
     qris: 3600
 };
 
-function hitungTotal() {
-    let rm = parseFloat(document.getElementById("jumlahRM").value);
-    let metode = document.getElementById("metode").value;
-    if (!rm) return;
+function hitung() {
+    const jumlah = Number(document.getElementById("jumlahRM").value);
+    const metode = document.getElementById("metode").value;
 
-    let target = rm * rate[metode];
-    let box = document.getElementById("totalBox");
+    let rate = metode === "qris" ? 3600 : 3700;
+    let total = jumlah * rate;
 
-    let angka = 0;
-    let anim = setInterval(() => {
-        angka += Math.ceil(target / 40);
-        if (angka >= target) {
-            angka = target;
-            clearInterval(anim);
-        }
+    // tampilkan rincian sebelum animasi total
+    document.getElementById("totalDisplay").innerHTML =
+        `<div style='font-size:16px; margin-bottom:10px;'>`
+        + `Jumlah RM: <b>${jumlah.toLocaleString()}</b><br>`
+        + `Rate: <b>${rate.toLocaleString()}</b><br>`
+        + `Perhitungan: <b>${jumlah.toLocaleString()} × ${rate.toLocaleString()}</b>`
+        + `</div>`;
+
+    // animasi nilai total
+    animateValue("totalDisplay", 0, total, 900);
+}
         box.innerHTML = "Total: Rp " + angka.toLocaleString();
     }, 30);
 }
