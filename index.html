@@ -1,255 +1,218 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Converter RM → IDR Premium</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Convert RM → IDR</title>
 <style>
-  :root{
-    --gold: #ffd966;
-    --gold-strong: rgba(255,215,0,0.45);
-    --card-bg: rgba(22,22,22,0.55);
-  }
-  html,body{height:100%; margin:0; font-family:Arial, Helvetica, sans-serif; background:#000; color:#fff; -webkit-font-smoothing:antialiased;}
-  /* floating symbols background */
-  .floating-symbols{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
-  .symbol{
-    position:absolute;
-    color: rgba(255,215,0,0.28);
-    will-change: transform, opacity;
-    user-select:none;
-    text-shadow:0 0 6px rgba(255,200,80,0.08);
-    mix-blend-mode: screen;
-  }
-  /* card */
-  .wrap{position:relative; z-index:10; padding:30px 20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; box-sizing:border-box;}
-  .card{
-    width:94%; max-width:400px; border-radius:18px; padding:22px;
-    background: linear-gradient(180deg, rgba(24,24,24,0.62), rgba(15,15,15,0.48));
-    border:1px solid rgba(255,215,0,0.18);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 40px rgba(255,200,60,0.06) inset;
-    backdrop-filter: blur(10px) saturate(120%);
-  }
-  h2{margin:4px 0 12px; color:var(--gold); text-align:center; font-size:22px;}
-  .marquee{width:100%; overflow:hidden; white-space:nowrap; margin-bottom:12px;}
-  .marquee span{display:inline-block; padding-left:100%; color:var(--gold); animation:marq 12s linear infinite;}
-  @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
-  label{display:block; font-size:13px; color:var(--gold); margin-top:8px;}
-  input[type="text"], input[type="number"], select, input[type="file"]{
-    width:100%; padding:10px 12px; margin-top:8px; border-radius:10px; background:#0e0e0e; color:#fff; border:1px solid rgba(255,255,255,0.04);
-    box-sizing:border-box; font-size:14px;
-  }
-  .btn{width:100%; padding:12px; border-radius:12px; border:none; font-weight:700; cursor:pointer; margin-top:12px; box-shadow:0 6px 18px rgba(0,0,0,0.6);}
-  .btn.gold{background:linear-gradient(90deg,var(--gold),#ffd24d); color:#111;}
-  .btn.green{background:#00e676; color:#022;}
-  .btn:hover{transform:translateY(-2px)}
-  #previewImg{display:none; width:100%; border-radius:10px; margin-top:10px; border:1px solid rgba(255,215,0,0.28);}
-  #totalDisplay{margin-top:12px; color:var(--gold); font-size:14px; line-height:1.6; min-height:56px; white-space:pre-line;}
-  .testi-box{margin-top:18px; height:180px; overflow:auto; border-radius:12px; padding:10px; background:linear-gradient(180deg, rgba(255,215,0,0.03), rgba(255,215,0,0.01)); border:1px solid rgba(255,215,0,0.06);}
-  .testi-item{background:rgba(255,255,255,0.03); padding:8px; margin-bottom:8px; border-radius:8px; font-size:13px;}
-  /* glow on card edges */
-  .card::before{content:""; position:absolute; inset:-2px; z-index:-1; border-radius:20px; background:linear-gradient(90deg, rgba(255,215,0,0.06), rgba(255,180,50,0.03)); filter:blur(20px); pointer-events:none;}
-  /* responsive */
-  @media (max-width:420px){ .card{padding:18px; max-width:360px;} h2{font-size:20px;} }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('https://i.ibb.co/0V4hVtV/blackgoldbg.jpg');
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(2px);
+        overflow-x: hidden;
+        color: white;
+    }/* Floating currency symbols */
+.symbol {
+    position: absolute;
+    font-size: 28px;
+    color: gold;
+    opacity: 0.3;
+    animation: float 6s linear infinite;
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120vh); }
+}
+
+.container {
+    max-width: 420px;
+    margin: 40px auto;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid gold;
+    padding: 20px;
+    border-radius: 14px;
+    backdrop-filter: blur(3px);
+}
+
+h2 {
+    text-align: center;
+    color: gold;
+    margin-top: 0;
+}
+
+label { font-weight: bold; color: gold; }
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 8px;
+    border: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover { background: #e6c200; }
+
+.totalBox {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-top: 10px;
+    border-radius: 8px;
+    color: gold;
+    font-weight: bold;
+}
+
+.testimoni {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid gold;
+}
+
+.testiItem {
+    background: rgba(0,0,0,0.4);
+    padding: 10px;
+    border-left: 3px solid gold;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+.runningText {
+    width: 100%;
+    background: rgba(255,255,255,0.15);
+    color: gold;
+    padding: 10px 0;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    animation: slide 10s linear infinite;
+}
+
+@keyframes slide {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
 </style>
 </head>
-<body>
-  <div class="floating-symbols" id="symbolContainer"></div>
-
-  <div class="wrap">
-    <div class="card" role="main" aria-labelledby="title">
-      <h2 id="title">Convert RM → IDR</h2>
-
-      <div class="marquee"><span>Proses Cepat • Aman • No Drama • Selalu Responsif • Trusted • Support 24 Jam</span></div>
-
-      <label for="nama">Nama</label>
-      <input id="nama" type="text" placeholder="Nama Anda" autocomplete="name">
-
-      <label for="nomor">Nomor WhatsApp</label>
-      <input id="nomor" type="text" placeholder="08xx..." inputmode="tel">
-
-      <label for="buktiFoto">Upload Bukti Transfer (foto)</label>
-      <input id="buktiFoto" type="file" accept="image/*" aria-describedby="previewHelp">
-
-      <img id="previewImg" alt="Preview bukti transfer">
-
-      <label for="bukti">Catatan / Link (opsional)</label>
-      <input id="bukti" type="text" placeholder="Catatan atau link bukti (opsional)">
-
-      <label for="metode">Pilih Metode</label>
-      <select id="metode" aria-label="Pilih metode pembayaran">
-        <option value="maybank">Maybank — Rate 3600</option>
-        <option value="tng">TNG — Rate 3600</option>
-        <option value="qris">QRIS — Rate 3500</option>
-      </select>
-
-      <label for="jumlahRM">Jumlah (RM)</label>
-      <input id="jumlahRM" type="number" placeholder="Masukkan jumlah RM" min="0" step="0.01">
-
-      <button class="btn gold" id="hitungBtn" type="button">Hitung Total Convert</button>
-
-      <div id="totalDisplay" aria-live="polite"></div>
-
-      <button class="btn green" id="konfBtn" type="button">Konfirmasi & Kirim ke Admin (WhatsApp)</button>
-
-      <h3 style="color: #ffd966; margin-top:18px; font-size:16px;">Testimoni</h3>
-      <div class="testi-box" id="testiBox" aria-live="polite" aria-atomic="false"></div>
-    </div>
-  </div>
-
-<script>
-/* ---------- background symbols (many, random size, random direction) ---------- */
-const symbols = ["$", "RM", "¥", "€", "₩", "₱", "£", "฿"];
-const container = document.getElementById('symbolContainer');
-const COUNT = 80; // banyak simbol sesuai permintaan
-for(let i=0;i<COUNT;i++){
-  const el = document.createElement('div');
-  el.className = 'symbol';
-  el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
-  // random start pos
-  const left = Math.random()*100;
-  const top = Math.random()*100;
-  el.style.left = left + '%';
-  el.style.top = top + '%';
-  // random size
-  const fs = Math.floor(14 + Math.random()*44);
-  el.style.fontSize = fs + 'px';
-  // random rotation
-  el.style.transform = `rotate(${Math.floor(Math.random()*60-30)}deg)`;
-  // random movement vector - dx/dy pixels
-  const dx = Math.floor((Math.random()*400)-200);
-  const dy = Math.floor((Math.random()*-500)-50); // mostly move up
-  el.style.setProperty('--dx', dx + 'px');
-  el.style.setProperty('--dy', dy + 'px');
-  // random duration and delay
-  const dur = (4 + Math.random()*10).toFixed(1);
-  const delay = (Math.random()*3).toFixed(2);
-  el.style.animation = `floatAnim ${dur}s linear ${delay}s infinite`;
-  el.style.opacity = (0.18 + Math.random()*0.4).toString();
-  container.appendChild(el);
-}
-/* keyframes inserted dynamically to use individual dx/dy via transform in CSS animation */
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-@keyframes floatAnim {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) rotate(20deg); opacity: 0; }
-}`;
-document.head.appendChild(styleSheet);
-
-
-/* ---------- preview uploaded foto ---------- */
-const buktiFoto = document.getElementById('buktiFoto');
-const previewImg = document.getElementById('previewImg');
-let lastFile = null;
-buktiFoto.addEventListener('change', (e)=>{
-  const f = e.target.files && e.target.files[0];
-  if(!f){ previewImg.style.display='none'; lastFile=null; return; }
-  lastFile = f;
-  const url = URL.createObjectURL(f);
-  previewImg.src = url;
-  previewImg.style.display = 'block';
-});
-
-/* ---------- animate number and detailed format B ---------- */
-function animateValueMulti(displayEl, start, end, duration, onTick, onComplete){
-  if(isNaN(end) || end < 0){ displayEl.textContent = ''; return; }
-  const startTime = performance.now();
-  function loop(now){
-    const p = Math.min((now - startTime)/duration, 1);
-    const val = Math.floor(start + (end - start) * p);
-    onTick(val, p);
-    if(p < 1) requestAnimationFrame(loop); else onComplete && onComplete();
-  }
-  requestAnimationFrame(loop);
-}
-
-function formatRupiah(n){
-  try{ return n.toLocaleString('id-ID'); }catch(e){ return n; }
-}
-
-document.getElementById('hitungBtn').addEventListener('click', ()=> {
-  const jumlah = Number(document.getElementById('jumlahRM').value) || 0;
-  const metode = document.getElementById('metode').value;
-  const rate = metode === 'qris' ? 3500 : 3600;
-  const total = Math.round(jumlah * rate);
-
-  if(jumlah <= 0){ document.getElementById('totalDisplay').innerText = 'Masukkan jumlah RM terlebih dahulu.'; return; }
-
-  // animate numeric counting while showing Format B details
-  const display = document.getElementById('totalDisplay');
-  display.innerHTML = `Jumlah RM : ${jumlah}\nRate Digunakan : ${rate}\nPerhitungan : ${jumlah} × ${rate}\nTotal Akhir : 0 IDR`;
-  animateValueMulti(display, 0, total, 1000,
-    (val, progress)=>{
-      // update last line only
-      const lines = `Jumlah RM : ${jumlah}\nRate Digunakan : ${rate}\nPerhitungan : ${jumlah} × ${rate}\nTotal Akhir : ${formatRupiah(val)} IDR`;
-      display.innerHTML = lines.replace(/\n/g,'<br>');
-    },
-    ()=>{ /* done */ }
-  );
-});
-
-/* ---------- testimoni (10) ---------- */
-const testi = [
-  "Fast banget prosesnya!",
-  "Admin ramah & responsif.",
-  "Langsung cair ke rekening, mantap!",
-  "Rate tinggi, puas banget.",
-  "Next bakal convert lagi di sini.",
-  "Amanah, trusted parah.",
-  "Gak pake ribet.",
-  "Sesuai janji, cepat!",
-  "Top service!",
-  "Bukti transfer langsung dicek."
-];
-const testiBox = document.getElementById('testiBox');
-testi.forEach(t => {
-  const d = document.createElement('div');
-  d.className = 'testi-item';
-  d.innerText = t;
-  testiBox.appendChild(d);
-});
-
-/* ---------- Kirim Konfirmasi ke WA (coba Web Share API untuk attach foto, fallback to wa.me) ---------- */
-document.getElementById('konfBtn').addEventListener('click', async ()=>{
-  const nama = document.getElementById('nama').value || '-';
-  const nomor = document.getElementById('nomor').value || '-';
-  const catatan = document.getElementById('bukti').value || '-';
-  const metode = document.getElementById('metode').value;
-  const jumlah = document.getElementById('jumlahRM').value || '-';
-  const rate = (metode === 'qris') ? 3500 : 3600;
-  const msgText = `Halo Admin, saya ingin konfirmasi convert:%0A%0ANama: ${nama}%0ANomor: ${nomor}%0AMetode: ${metode}%0AJumlah RM: ${jumlah}%0ARate: ${rate}%0ACatatan: ${catatan}`;
-
-  // If user selected a file and browser supports sharing files -> try to share with file
-  if(lastFile && navigator.canShare && navigator.canShare({files: [lastFile]})){
-    try{
-      await navigator.share({
-        files: [lastFile],
-        text: `Halo Admin, saya ingin konfirmasi convert.\nNama: ${nama}\nNomor: ${nomor}\nMetode: ${metode}\nJumlah RM: ${jumlah}\nCatatan: ${catatan}`
-      });
-      // navigator.share will open system share sheet (user can choose WhatsApp)
-      return;
-    }catch(err){
-      // share failed - fall through to wa.me fallback
-      console.warn('Web Share failed:', err);
+<body><!-- Floating currency symbols --><script>
+    const symbols = ["$", "€", "¥", "£", "₩", "฿", "₱", "₫", "₹", "RM"];
+    for (let i = 0; i < 20; i++) {
+        let s = document.createElement("div");
+        s.className = "symbol";
+        s.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+        s.style.left = Math.random()*100 + "vw";
+        s.style.top = (Math.random()*100 + 100) + "vh";
+        s.style.animationDuration = (4 + Math.random()*6) + "s";
+        document.body.appendChild(s);
     }
-  }
+</script><div class="container">
+    <h2>FORM KONVERSI RM → IDR</h2><!-- Form data diri -->
+<label>Nama Lengkap</label>
+<input type="text" id="nama" placeholder="Nama kamu" />
 
-  // Fallback: open wa.me with prefilled text (user must attach photo manually)
-  const wa = `https://wa.me/6281385371544?text=${encodeURIComponent(decodeURIComponent(msgText))}`;
-  window.open(wa, '_blank');
-});
+<label>Nomor WhatsApp</label>
+<input type="text" id="wa" placeholder="08xxxxxxxx" />
 
-/* ---------- accessibility: allow Enter to trigger hitung ---------- */
-document.getElementById('jumlahRM').addEventListener('keydown', (e)=>{
-  if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('hitungBtn').click(); }
-});
+<label>Upload Bukti Transfer</label>
+<input type="file" id="bukti" accept="image/*" />
 
-/* ---------- small guard: revoke object URLs on unload ---------- */
-window.addEventListener('beforeunload', ()=>{
-  try{ if(previewImg && previewImg.src) URL.revokeObjectURL(previewImg.src); }catch(e){}
+<label>Pilih Metode Penerimaan</label>
+<select id="metode">
+    <option value="maybank">Maybank (3700)</option>
+    <option value="tng">TNG (3700)</option>
+    <option value="qris">QRIS (3600)</option>
+</select>
+
+<label>Jumlah RM</label>
+<input type="number" id="jumlahRM" placeholder="Masukkan jumlah RM" />
+
+<button class="btn" onclick="hitungTotal()">Hitung Total IDR</button>
+
+<div class="totalBox" id="totalBox">Total: Rp 0</div>
+
+<button class="btn" style="margin-top:15px; background:#00ff88" onclick="kirimWA()">Konfirmasi ke Admin</button>
+
+<div class="runningText">PROSES CEPAT • AMAN • NO DRAMA • RESPONSIF SETIAP SAAT</div>
+
+<h2 style="margin-top:35px;">TESTIMONI</h2>
+<div class="testimoni" id="testiBox"></div>
+
+</div><script>
+// RATE FIX
+const rate = {
+    maybank: 3700,
+    tng: 3700,
+    qris: 3600
+};
+
+function hitungTotal() {
+    let rm = parseFloat(document.getElementById("jumlahRM").value);
+    let metode = document.getElementById("metode").value;
+    if (!rm) return;
+
+    let target = rm * rate[metode];
+    let box = document.getElementById("totalBox");
+
+    let angka = 0;
+    let anim = setInterval(() => {
+        angka += Math.ceil(target / 40);
+        if (angka >= target) {
+            angka = target;
+            clearInterval(anim);
+        }
+        box.innerHTML = "Total: Rp " + angka.toLocaleString();
+    }, 30);
+}
+
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let wa = document.getElementById("wa").value;
+    let metode = document.getElementById("metode").value;
+    let rm = document.getElementById("jumlahRM").value;
+
+    let pesan = `Halo admin, saya ingin konfirmasi convert%0A%0ANama: ${nama}%0AWA: ${wa}%0AMetode: ${metode}%0AJumlah RM: ${rm}`;
+
+    window.open(`https://wa.me/6281385371544?text=${pesan}`);
+}
+
+// Testimoni list
+let testimoni = [
+    "Mantap proses cepat!",
+    "Admin ramah dan respon cepat.",
+    "Gausah ragu, aman trusted.",
+    "Transaksi lancar, no drama.",
+    "Sudah berkali-kali di sini.",
+    "Paling rekomended untuk convert.",
+    "Rate bagus dan stabil.",
+    "Bukti langsung dikirim cepat.",
+    "Deposit dan withdraw aman.",
+    "Rekomen banget buat harian."
+];
+
+let testiBox = document.getElementById("testiBox");
+testimoni.forEach(t => {
+    let d = document.createElement("div");
+    d.className = "testiItem";
+    d.innerHTML = t;
+    testiBox.appendChild(d);
 });
-</script>
-</body>
+</script></body>
 </html>
