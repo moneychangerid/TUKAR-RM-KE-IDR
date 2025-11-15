@@ -1,224 +1,219 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Convert RM → IDR Premium</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAK Conversion</title>
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #000;
-        overflow-x: hidden;
-        color: #fff;
-    }/* BACKGROUND SYMBOL */
-.floating-symbols {
+  /* ===== Reset ===== */
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
+  body {
+    background: black;
+    color: #FFD700;
+    overflow-x: hidden;
+  }
+
+  /* ===== Background Symbols Falling ===== */
+  body::before {
+    content: '';
     position: fixed;
-    top: 0; left: 0;
     width: 100%; height: 100%;
-    pointer-events: none;
-    overflow: hidden;
+    background-image: url('https://i.imgur.com/2D6lGQq.png'); /* simbol RM icon PNG transparan contoh */
+    background-repeat: repeat;
+    opacity: 0.03;
+    animation: floatSymbol 60s linear infinite;
     z-index: -1;
-}
-.symbol {
-    position: absolute;
-    font-size: 24px;
-    color: rgba(255,215,0,0.35);
-    animation: floatUp 8s linear infinite;
-}
-@keyframes floatUp {
-    0% { transform: translateY(100vh); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
-}
+  }
+  @keyframes floatSymbol {
+    0% { background-position: 0 0; }
+    100% { background-position: -1000px 1000px; }
+  }
 
-/* CARD */
-.card {
-    width: 90%;
-    max-width: 480px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(30,30,30,0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,215,0,0.35);
-    box-shadow: 0 0 20px rgba(255,215,0,0.25);
-}
-h2 {
+  /* ===== Header ===== */
+  header {
+    padding: 30px;
     text-align: center;
-    margin-bottom: 15px;
-    color: gold;
-    font-size: 24px;
-}
+    font-size: 2.5em;
+    text-shadow: 0 0 20px #FFD700;
+  }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 12px;
-    border: none;
-    outline: none;
-    background: #111;
-    color: #fff;
-    font-size: 15px;
-    border: 1px solid #444;
-}
-
-.btn {
-    width: 100%;
-    padding: 14px;
-    background: gold;
-    color: black;
-    border: none;
-    margin-top: 10px;
-    border-radius: 14px;
-    font-weight: bold;
-    font-size: 17px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn:hover {
-    background: #ffea77;
-    transform: scale(1.03);
-}
-
-#totalDisplay {
-    text-align: center;
-    font-size: 22px;
-    margin-top: 15px;
-    color: gold;
-    font-weight: bold;
-}
-
-/* TESTIMONI */
-.testi-box {
-    margin-top: 25px;
-    padding: 15px;
-    border-radius: 15px;
-    background: rgba(255,215,0,0.1);
-    border: 1px solid rgba(255,215,0,0.25);
-    height: 200px;
-    overflow-y: auto;
-}
-.testi-item {
-    background: rgba(255,255,255,0.08);
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 10px;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-/* MARQUEE */
-.marquee {
+  /* ===== Marquee Tulisan ===== */
+  .marquee-container {
     width: 100%;
     overflow: hidden;
-    white-space: nowrap;
-    box-sizing: border-box;
-    margin-top: 20px;
-    font-size: 15px;
-    color: gold;
-}
-.marquee span {
+    border-top: 2px solid #FFD700;
+    border-bottom: 2px solid #FFD700;
+    margin-bottom: 30px;
+  }
+  .marquee {
     display: inline-block;
+    white-space: nowrap;
     padding-left: 100%;
-    animation: marqueeMove 12s linear infinite;
-}
-@keyframes marqueeMove {
+    animation: marquee 20s linear infinite;
+    font-size: 1.2em;
+    padding: 10px 0;
+    text-shadow: 0 0 5px #FFD700;
+  }
+  @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
-}
+  }
+
+  /* ===== Glass Card ===== */
+  .card {
+    background: rgba(255, 215, 0, 0.05);
+    border: 2px solid #FFD700;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255,215,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 50px rgba(255,215,0,0.5);
+  }
+
+  .card h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px 5px;
+    color: black;
+    background: #FFD700;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #FFD700;
+  }
+
+  /* ===== Pilihan Bank & Rate ===== */
+  .rate-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .rate-box {
+    background: rgba(255,215,0,0.05);
+    border: 1px solid #FFD700;
+    border-radius: 15px;
+    padding: 15px;
+    min-width: 120px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255,215,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .rate-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(255,215,0,0.4);
+  }
+  .rate-box h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+
+  /* ===== Testimoni ===== */
+  .testimoni {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  .testi-card {
+    background: rgba(255,215,0,0.05);
+    border: 1px solid #FFD700;
+    border-radius: 20px;
+    padding: 20px;
+    min-width: 250px;
+    flex: 0 0 auto;
+    box-shadow: 0 0 15px rgba(255,215,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .testi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255,215,0,0.5);
+  }
+  .testi-card p {
+    margin-bottom: 10px;
+  }
+  .testi-card strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+
+  /* ===== Scrollbar Testimoni ===== */
+  .testimoni::-webkit-scrollbar {
+    height: 8px;
+  }
+  .testimoni::-webkit-scrollbar-thumb {
+    background: #FFD70055;
+    border-radius: 4px;
+  }
 
 </style>
 </head>
 <body>
-<div class="floating-symbols" id="symbolContainer"></div>
+
+<header>AAK Conversion - Exchange RM & More</header>
+
+<div class="marquee-container">
+  <div class="marquee">💰 Rate Via Maybank 3700 | 💰 Via TNG 3700 | 💰 Via QRIS 3600 | 💰 Fast & Trusted! 💸</div>
+</div>
+
 <div class="card">
-    <h2>Convert RM → IDR</h2><div class="marquee"><span>Proses Cepat • Aman • No Drama • Responsive • Trusted • Support 24 Jam</span></div>
+  <h2>Fitur Penukaran</h2>
+  <a href="https://wa.me/6281385371544" class="btn">Hubungi via WhatsApp</a>
+  <a href="#" class="btn">CV via Maybank</a>
 
-<h3 style="color:gold; margin-top:20px;">Konfirmasi Data</h3>
-<input type="text" id="nama" placeholder="Nama Anda">
-<input type="text" id="nomor" placeholder="Nomor WhatsApp">
-<input type="file" id="bukti" accept="image/*">
+  <div class="rate-container">
+    <div class="rate-box">
+      <h3>Maybank</h3>
+      <p>Rate: 3700</p>
+    </div>
+    <div class="rate-box">
+      <h3>TNG</h3>
+      <p>Rate: 3700</p>
+    </div>
+    <div class="rate-box">
+      <h3>QRIS</h3>
+      <p>Rate: 3600</p>
+    </div>
+  </div>
+</div>
 
-<h3 style="color:gold; margin-top:20px;">Pilih Metode</h3>
-<select id="metode">
-    <option value="maybank">Maybank — Rate 3700</option>
-    <option value="tng">TNG — Rate 3700</option>
-    <option value="qris">QRIS — Rate 3600</option>
-</select>
+<section class="testimoni">
+  <div class="testi-card">
+    <strong>Ali</strong>
+    <p>"Cepat dan aman, rate bagus!"</p>
+  </div>
+  <div class="testi-card">
+    <strong>Siti</strong>
+    <p>"Transaksi lancar, pelayanan ramah."</p>
+  </div>
+  <div class="testi-card">
+    <strong>Rahman</strong>
+    <p>"Rekomendasi banget buat convert RM!"</p>
+  </div>
+  <div class="testi-card">
+    <strong>Fatimah</strong>
+    <p>"Tombol CV & WhatsApp sangat membantu, smooth banget."</p>
+  </div>
+</section>
 
-<input type="number" id="jumlahRM" placeholder="Masukkan jumlah RM">
-
-<button class="btn" onclick="hitung()">Hitung Total Convert</button>
-
-<div id="totalDisplay"></div>
-
-<button class="btn" onclick="kirimWA()" style="background:#00e676;">Konfirmasi ke Admin</button>
-
-<h3 style="color:gold; margin-top:30px;">Testimoni</h3>
-<div class="testi-box" id="testiBox"></div>
-
-</div><script>
-// SYMBOL BACKGROUND
-const symbols = ["$", "RM", "¥", "€", "₩", "₱", "£", "฿"]; 
-const container = document.getElementById("symbolContainer");
-for (let i = 0; i < 40; i++) {
-    const el = document.createElement("div");
-    el.className = "symbol";
-    el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-    el.style.left = Math.random() * 100 + "%";
-    el.style.animationDuration = 6 + Math.random() * 6 + "s";
-    el.style.fontSize = 18 + Math.random() * 20 + "px";
-    container.appendChild(el);
-}
-
-// HITUNG TOTAL
-function animateValue(id, start, end, duration) {
-    let range = end - start;
-    let startTime = performance.now();
-
-    function update(currentTime) {
-        let progress = Math.min((currentTime - startTime) / duration, 1);
-        let value = Math.floor(progress * range + start);
-        document.getElementById(id).innerHTML =
-        "Total IDR: " + value.toLocaleString();
-        if (progress < 1) requestAnimationFrame(update);
-    }
-    requestAnimationFrame(update);
-}
-
-function hitung() {
-    const jumlah = Number(document.getElementById("jumlahRM").value);
-    const metode = document.getElementById("metode").value;
-
-    let rate = metode === "qris" ? 3600 : 3700;
-    let total = jumlah * rate;
-
-    animateValue("totalDisplay", 0, total, 900);
-}
-
-// TESTIMONI
-const testi = [
-    "Fast banget prosesnya!",
-    "Admin ramah & responsif.",
-    "Langsung cair ke rekening, mantap!",
-    "Rate tinggi, puas banget.",
-    "Next bakal convert lagi di sini.",
-    "Amanah, trusted parah.",
-    "Gak pake ribet.",
-    "Sesuai janji, cepat!",
-    "Top service!",
-    "Bukti transfer langsung dicek."
-];
-
-testi.forEach(t => {
-    let div = document.createElement("div");
-    div.className = "testi-item";
-    div.innerText = t;
-    document.getElementById("testiBox").appendChild(div);
-});
-
-// WHATSAPP SEND
-function kirimWA() {
-    let nama = document.getElementById("nama").value;
-    let nomor
+</body>
+</html>
