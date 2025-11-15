@@ -1,219 +1,218 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AAK Conversion</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Convert RM → IDR</title>
 <style>
-  /* ===== Reset ===== */
-  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
-  body {
-    background: black;
-    color: #FFD700;
-    overflow-x: hidden;
-  }
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('https://i.ibb.co/0V4hVtV/blackgoldbg.jpg');
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(2px);
+        overflow-x: hidden;
+        color: white;
+    }/* Floating currency symbols */
+.symbol {
+    position: absolute;
+    font-size: 28px;
+    color: gold;
+    opacity: 0.3;
+    animation: float 6s linear infinite;
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120vh); }
+}
 
-  /* ===== Background Symbols Falling ===== */
-  body::before {
-    content: '';
-    position: fixed;
-    width: 100%; height: 100%;
-    background-image: url('https://i.imgur.com/2D6lGQq.png'); /* simbol RM icon PNG transparan contoh */
-    background-repeat: repeat;
-    opacity: 0.03;
-    animation: floatSymbol 60s linear infinite;
-    z-index: -1;
-  }
-  @keyframes floatSymbol {
-    0% { background-position: 0 0; }
-    100% { background-position: -1000px 1000px; }
-  }
+.container {
+    max-width: 420px;
+    margin: 40px auto;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid gold;
+    padding: 20px;
+    border-radius: 14px;
+    backdrop-filter: blur(3px);
+}
 
-  /* ===== Header ===== */
-  header {
-    padding: 30px;
+h2 {
     text-align: center;
-    font-size: 2.5em;
-    text-shadow: 0 0 20px #FFD700;
-  }
+    color: gold;
+    margin-top: 0;
+}
 
-  /* ===== Marquee Tulisan ===== */
-  .marquee-container {
+label { font-weight: bold; color: gold; }
+
+input, select {
     width: 100%;
-    overflow: hidden;
-    border-top: 2px solid #FFD700;
-    border-bottom: 2px solid #FFD700;
-    margin-bottom: 30px;
-  }
-  .marquee {
-    display: inline-block;
-    white-space: nowrap;
-    padding-left: 100%;
-    animation: marquee 20s linear infinite;
-    font-size: 1.2em;
-    padding: 10px 0;
-    text-shadow: 0 0 5px #FFD700;
-  }
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 8px;
+    border: none;
+}
 
-  /* ===== Glass Card ===== */
-  .card {
-    background: rgba(255, 215, 0, 0.05);
-    border: 2px solid #FFD700;
-    border-radius: 25px;
-    backdrop-filter: blur(15px);
-    padding: 25px;
-    margin: 20px auto;
-    max-width: 550px;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(255,215,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 50px rgba(255,215,0,0.5);
-  }
-
-  .card h2 {
-    margin-bottom: 20px;
-    font-size: 1.8em;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 12px 25px;
-    margin: 10px 5px;
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: gold;
     color: black;
-    background: #FFD700;
-    border-radius: 15px;
-    text-decoration: none;
     font-weight: bold;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px #FFD700;
-  }
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-  /* ===== Pilihan Bank & Rate ===== */
-  .rate-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-  .rate-box {
-    background: rgba(255,215,0,0.05);
-    border: 1px solid #FFD700;
-    border-radius: 15px;
-    padding: 15px;
-    min-width: 120px;
-    margin: 10px;
+.btn:hover { background: #e6c200; }
+
+.totalBox {
+    font-size: 20px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(255,215,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .rate-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(255,215,0,0.4);
-  }
-  .rate-box h3 {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-  }
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-top: 10px;
+    border-radius: 8px;
+    color: gold;
+    font-weight: bold;
+}
 
-  /* ===== Testimoni ===== */
-  .testimoni {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 20px;
-    margin-bottom: 30px;
-  }
-  .testi-card {
-    background: rgba(255,215,0,0.05);
-    border: 1px solid #FFD700;
-    border-radius: 20px;
-    padding: 20px;
-    min-width: 250px;
-    flex: 0 0 auto;
-    box-shadow: 0 0 15px rgba(255,215,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .testi-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(255,215,0,0.5);
-  }
-  .testi-card p {
-    margin-bottom: 10px;
-  }
-  .testi-card strong {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1.1em;
-  }
+.testimoni {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid gold;
+}
 
-  /* ===== Scrollbar Testimoni ===== */
-  .testimoni::-webkit-scrollbar {
-    height: 8px;
-  }
-  .testimoni::-webkit-scrollbar-thumb {
-    background: #FFD70055;
-    border-radius: 4px;
-  }
+.testiItem {
+    background: rgba(0,0,0,0.4);
+    padding: 10px;
+    border-left: 3px solid gold;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+.runningText {
+    width: 100%;
+    background: rgba(255,255,255,0.15);
+    color: gold;
+    padding: 10px 0;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    animation: slide 10s linear infinite;
+}
+
+@keyframes slide {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
 
 </style>
 </head>
-<body>
+<body><!-- Floating currency symbols --><script>
+    const symbols = ["$", "€", "¥", "£", "₩", "฿", "₱", "₫", "₹", "RM"];
+    for (let i = 0; i < 20; i++) {
+        let s = document.createElement("div");
+        s.className = "symbol";
+        s.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+        s.style.left = Math.random()*100 + "vw";
+        s.style.top = (Math.random()*100 + 100) + "vh";
+        s.style.animationDuration = (4 + Math.random()*6) + "s";
+        document.body.appendChild(s);
+    }
+</script><div class="container">
+    <h2>FORM KONVERSI RM → IDR</h2><!-- Form data diri -->
+<label>Nama Lengkap</label>
+<input type="text" id="nama" placeholder="Nama kamu" />
 
-<header>AAK Conversion - Exchange RM & More</header>
+<label>Nomor WhatsApp</label>
+<input type="text" id="wa" placeholder="08xxxxxxxx" />
 
-<div class="marquee-container">
-  <div class="marquee">💰 Rate Via Maybank 3700 | 💰 Via TNG 3700 | 💰 Via QRIS 3600 | 💰 Fast & Trusted! 💸</div>
-</div>
+<label>Upload Bukti Transfer</label>
+<input type="file" id="bukti" accept="image/*" />
 
-<div class="card">
-  <h2>Fitur Penukaran</h2>
-  <a href="https://wa.me/6281385371544" class="btn">Hubungi via WhatsApp</a>
-  <a href="#" class="btn">CV via Maybank</a>
+<label>Pilih Metode Penerimaan</label>
+<select id="metode">
+    <option value="maybank">Maybank (3700)</option>
+    <option value="tng">TNG (3700)</option>
+    <option value="qris">QRIS (3600)</option>
+</select>
 
-  <div class="rate-container">
-    <div class="rate-box">
-      <h3>Maybank</h3>
-      <p>Rate: 3700</p>
-    </div>
-    <div class="rate-box">
-      <h3>TNG</h3>
-      <p>Rate: 3700</p>
-    </div>
-    <div class="rate-box">
-      <h3>QRIS</h3>
-      <p>Rate: 3600</p>
-    </div>
-  </div>
-</div>
+<label>Jumlah RM</label>
+<input type="number" id="jumlahRM" placeholder="Masukkan jumlah RM" />
 
-<section class="testimoni">
-  <div class="testi-card">
-    <strong>Ali</strong>
-    <p>"Cepat dan aman, rate bagus!"</p>
-  </div>
-  <div class="testi-card">
-    <strong>Siti</strong>
-    <p>"Transaksi lancar, pelayanan ramah."</p>
-  </div>
-  <div class="testi-card">
-    <strong>Rahman</strong>
-    <p>"Rekomendasi banget buat convert RM!"</p>
-  </div>
-  <div class="testi-card">
-    <strong>Fatimah</strong>
-    <p>"Tombol CV & WhatsApp sangat membantu, smooth banget."</p>
-  </div>
-</section>
+<button class="btn" onclick="hitungTotal()">Hitung Total IDR</button>
 
-</body>
+<div class="totalBox" id="totalBox">Total: Rp 0</div>
+
+<button class="btn" style="margin-top:15px; background:#00ff88" onclick="kirimWA()">Konfirmasi ke Admin</button>
+
+<div class="runningText">PROSES CEPAT • AMAN • NO DRAMA • RESPONSIF SETIAP SAAT</div>
+
+<h2 style="margin-top:35px;">TESTIMONI</h2>
+<div class="testimoni" id="testiBox"></div>
+
+</div><script>
+// RATE FIX
+const rate = {
+    maybank: 3700,
+    tng: 3700,
+    qris: 3600
+};
+
+function hitungTotal() {
+    let rm = parseFloat(document.getElementById("jumlahRM").value);
+    let metode = document.getElementById("metode").value;
+    if (!rm) return;
+
+    let target = rm * rate[metode];
+    let box = document.getElementById("totalBox");
+
+    let angka = 0;
+    let anim = setInterval(() => {
+        angka += Math.ceil(target / 40);
+        if (angka >= target) {
+            angka = target;
+            clearInterval(anim);
+        }
+        box.innerHTML = "Total: Rp " + angka.toLocaleString();
+    }, 30);
+}
+
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let wa = document.getElementById("wa").value;
+    let metode = document.getElementById("metode").value;
+    let rm = document.getElementById("jumlahRM").value;
+
+    let pesan = `Halo admin, saya ingin konfirmasi convert%0A%0ANama: ${nama}%0AWA: ${wa}%0AMetode: ${metode}%0AJumlah RM: ${rm}`;
+
+    window.open(`https://wa.me/6281385371544?text=${pesan}`);
+}
+
+// Testimoni list
+let testimoni = [
+    "Mantap proses cepat!",
+    "Admin ramah dan respon cepat.",
+    "Gausah ragu, aman trusted.",
+    "Transaksi lancar, no drama.",
+    "Sudah berkali-kali di sini.",
+    "Paling rekomended untuk convert.",
+    "Rate bagus dan stabil.",
+    "Bukti langsung dikirim cepat.",
+    "Deposit dan withdraw aman.",
+    "Rekomen banget buat harian."
+];
+
+let testiBox = document.getElementById("testiBox");
+testimoni.forEach(t => {
+    let d = document.createElement("div");
+    d.className = "testiItem";
+    d.innerHTML = t;
+    testiBox.appendChild(d);
+});
+</script></body>
 </html>
