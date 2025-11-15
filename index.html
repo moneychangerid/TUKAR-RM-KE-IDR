@@ -2,83 +2,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RM ➜ IDR Converter Premium</title>
+  <title>RM ➜ IDR Converter Premium Gold</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(120deg,#000,#1a1a1a,#000);
-      background-size: 400% 400%;
-      animation: bgMove 12s infinite alternate;
+      background: linear-gradient(135deg,#0d0d0d,#1a1a1a,#0d0d0d);
+      background-size: 300% 300%;
+      animation: bgMove 14s infinite alternate;
       color: #fff;
       overflow-x: hidden;
     }
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }.currency-floating span {
+    @keyframes bgMove { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }.gold { color:#ffdd66; }
+
+.currency-floating span {
   position: absolute;
-  font-size: 22px;
+  font-size: 26px;
   opacity: 0.15;
-  animation: floatUp 10s linear infinite;
+  animation: floatUp 11s linear infinite;
+  color:#ffdd66;
 }
-@keyframes floatUp {
-  0% { transform: translateY(110vh); }
-  100% { transform: translateY(-10vh); }
-}
+@keyframes floatUp { 0%{transform:translateY(110vh);} 100%{transform:translateY(-10vh);} }
 
 .container {
-  max-width: 480px;
+  max-width: 500px;
   margin: 40px auto;
-  padding: 25px;
-  background: rgba(20,20,20,0.65);
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 25px rgba(255,255,255,0.12);
+  padding: 28px;
+  background: rgba(20,20,20,0.55);
+  border-radius: 20px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 35px rgba(255,215,100,0.18);
+  border: 2px solid rgba(255,200,60,0.18);
 }
 
 h1 {
   text-align: center;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 32px;
   margin-bottom: 25px;
+  color:#ffdd66;
 }
 
-.input-group { margin-bottom: 20px; }
+.input-group { margin-bottom: 18px; }
 label { font-size: 14px; opacity: .9; }
-input, select {
+
+input, select, textarea {
   width: 100%; padding: 12px; margin-top: 6px;
-  border-radius: 10px; border: none; outline: none;
+  border-radius: 12px; border: none; outline: none;
   background: #222; color: #fff; font-size: 16px;
 }
 
 button {
   width: 100%; padding: 14px;
-  background: #ffdd00; border: none;
-  border-radius: 12px; font-size: 18px; font-weight: bold;
+  background: linear-gradient(90deg,#ffdd55,#ffcc33);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 0 15px rgba(255,220,100,0.3);
 }
-button:hover { background: #ffd700; }
+button:hover { filter: brightness(1.08); }
 
 .result-box {
   margin-top: 25px;
   padding: 22px;
-  background: #1a1a1a;
-  border-radius: 14px;
-  font-size: 22px;
+  background: rgba(35,35,35,0.6);
+  border-radius: 16px;
+  font-size: 20px;
   text-align: center;
-  border: 1px solid #333;
+  border: 2px solid rgba(255,200,80,0.22);
+  box-shadow: 0 0 20px rgba(255,200,80,0.15);
   display: none;
 }
 
 .upload-box {
   margin-top: 20px;
   padding: 15px;
-  background: #111;
-  border-radius: 12px;
+  background: rgba(25,25,25,0.65);
+  border-radius: 14px;
   border: 1px solid #333;
 }
-.upload-box input { background:#000; }
+
+.pay-select {
+  margin:20px 0;
+  padding: 15px;
+  background: rgba(25,25,25,0.55);
+  border-radius:14px;
+  border: 1px solid #444;
+}
+
+.wa-button {
+  margin-top: 20px;
+  padding: 14px;
+  background: #25d366;
+  border-radius: 12px;
+  font-size: 18px;
+  color: #111;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow:0 0 12px rgba(0,255,120,0.25);
+}
 
 .testimoni-section {
   margin-top: 35px;
@@ -86,9 +110,10 @@ button:hover { background: #ffd700; }
   overflow-y: auto;
   padding-right: 10px;
 }
+
 .testi {
-  background: #151515;
-  border-radius: 12px;
+  background: rgba(20,20,20,0.7);
+  border-radius: 14px;
   padding: 15px;
   margin-bottom: 12px;
   border: 1px solid #333;
@@ -105,15 +130,28 @@ button:hover { background: #ffd700; }
   <span style="left:60%; animation-delay:4s">₩</span>
   <span style="left:80%; animation-delay:6s">£</span>
 </div><div class="container">
-  <h1>Konversi RM ➜ IDR (Auto‑Rate)</h1>  <div class="input-group">
+  <h1>Konversi RM ➜ IDR</h1>  <div class="input-group">
     <label>Masukkan jumlah (RM)</label>
     <input type="number" id="rmInput" placeholder="cth: 100" />
+  </div>  <div class="pay-select">
+    <label class="gold">Pilih metode penerimaan:</label>
+    <select id="methodSelect">
+      <option value="maybank">Maybank</option>
+      <option value="tng">Touch 'n Go</option>
+      <option value="qris">QRIS</option>
+    </select>
   </div><button onclick="convert()">Konversi</button>
 
   <div id="result" class="result-box"></div>  <div class="upload-box">
-    <label>Upload bukti transaksi:</label>
+    <label class="gold">Upload bukti transaksi:</label>
     <input type="file" id="fileUpload" accept="image/*" />
-  </div>  <h2 style="margin-top:30px; font-size:20px;">Testimoni Pelanggan</h2>
+  </div>  <div class="input-group" style="margin-top:20px;">
+    <label class="gold">Konfirmasi data (nama, bank, no. tujuan)</label>
+    <textarea id="confirmData" rows="4" placeholder="contoh:
+Nama: ...
+Bank/QRIS: ...
+Nomor tujuan: ..."></textarea>
+  </div>  <div class="wa-button" onclick="window.location.href='https://wa.me/6281385371544'">Chat Admin via WhatsApp</div>  <h2 style="margin-top:30px; font-size:20px;" class="gold">Testimoni Pelanggan</h2>
   <div class="testimoni-section" id="testiBox"></div>
 </div><script>
   const testimonies = [
@@ -131,9 +169,7 @@ button:hover { background: #ffd700; }
 
   window.onload = function() {
     const box = document.getElementById("testiBox");
-    testimonies.forEach(t => {
-      box.innerHTML += `<div class='testi'>${t}</div>`;
-    });
+    testimonies.forEach(t => box.innerHTML += `<div class='testi'>${t}</div>`);
   };
 
   function getAutoRate(rm) {
@@ -145,17 +181,20 @@ button:hover { background: #ffd700; }
 
   function convert() {
     const rm = parseFloat(document.getElementById("rmInput").value);
+    const method = document.getElementById("methodSelect").value;
     const resultBox = document.getElementById("result");
 
-    if (!rm) {
-      alert("Masukkan jumlah RM terlebih dahulu!");
-      return;
-    }
+    if (!rm) { alert("Masukkan jumlah RM terlebih dahulu!"); return; }
 
     const feeRate = getAutoRate(rm);
     const fee = rm * feeRate;
     const totalRM = rm - fee;
-    const finalIDR = totalRM * 3500;
+
+    let baseRate = 3500;
+    if (method === "tng") baseRate = 3400;
+    if (method === "qris") baseRate = 3300;
+
+    const finalIDR = totalRM * baseRate;
 
     let current = 0;
     resultBox.style.display = "block";
@@ -167,9 +206,10 @@ button:hover { background: #ffd700; }
         current = finalIDR;
         clearInterval(anim);
       }
-      resultBox.innerHTML = `Hasil Akhir:<br><strong>IDR ${Math.floor(current).toLocaleString()}</strong><br><br>
+      resultBox.innerHTML = `Hasil Akhir:<br><strong class='gold'>IDR ${Math.floor(current).toLocaleString()}</strong><br><br>
       Fee: RM ${fee.toFixed(2)} (${(feeRate*100)}%)<br>
-      Total Setelah Fee: RM ${totalRM.toFixed(2)}`;
+      Total Setelah Fee: RM ${totalRM.toFixed(2)}<br>
+      Rate (${method.toUpperCase()}): ${baseRate}`;
     }, 40);
   }
 </script></body>
