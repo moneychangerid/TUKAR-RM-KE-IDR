@@ -18,17 +18,16 @@
     100% { background-position: 0% 50%; }
 }
 
-/* Floating currency symbols */
 .symbol {
     position: absolute;
     font-size: 28px;
     color: gold;
-    opacity: 0.3;
-    animation: float 6s linear infinite;
+    opacity: 0.25;
+    animation: float 7s linear infinite;
 }
 @keyframes float {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-120vh); }
+    100% { transform: translateY(-130vh); }
 }
 
 .container {
@@ -41,75 +40,53 @@
     backdrop-filter: blur(3px);
 }
 
-h2 {
-    text-align: center;
-    color: gold;
-    margin-top: 0;
-}
-
+h2 { text-align: center; color: gold; margin-top: 0; }
 label { font-weight: bold; color: gold; }
 
 input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 15px 0;
-    border-radius: 8px;
-    border: none;
+    width: 100%; padding: 10px; margin: 5px 0 15px 0; border-radius: 8px; border: none;
 }
 
 .btn {
-    width: 100%;
-    padding: 12px;
-    background: gold;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    width: 100%; padding: 12px; background: gold; color: black;
+    font-weight: bold; border: none; border-radius: 8px; cursor: pointer;
 }
 
 .btn:hover { background: #e6c200; }
 
 .totalBox {
-    font-size: 20px;
-    text-align: center;
-    padding: 10px;
+    font-size: 20px; text-align: center; padding: 10px;
     background: rgba(255, 255, 255, 0.15);
-    margin-top: 10px;
-    border-radius: 8px;
-    color: gold;
-    font-weight: bold;
+    margin-top: 10px; border-radius: 8px;
+    color: gold; font-weight: bold;
 }
 
-.testimoni {
-    margin-top: 25px;
-    padding: 15px;
+.testiBox {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 10px;
     background: rgba(255,255,255,0.1);
     border-radius: 12px;
-    height: 200px;
-    overflow-y: scroll;
     border: 1px solid gold;
 }
 
 .testiItem {
-    background: rgba(0,0,0,0.4);
-    padding: 10px;
-    border-left: 3px solid gold;
-    margin-bottom: 10px;
-    border-radius: 6px;
+    padding: 12px;
+    background: rgba(0,0,0,0.45);
+    border-left: 4px solid gold;
+    border-radius: 10px;
 }
 
 .runningText {
-    width: 100%;
-    background: rgba(255,255,255,0.15);
-    color: gold;
-    padding: 10px 0;
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
+    width: 100%; background: rgba(255,255,255,0.12);
+    color: gold; padding: 10px 0; margin-top: 20px;
+    text-align: center; font-weight: bold;
     animation: slide 10s linear infinite;
 }
-
 @keyframes slide {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
@@ -117,20 +94,19 @@ input, select {
 
 </style>
 </head>
-<body><!-- Floating currency symbols --><script>
+<body><script>
     const symbols = ["$", "€", "¥", "£", "₩", "฿", "₱", "₫", "₹", "RM"];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
         let s = document.createElement("div");
         s.className = "symbol";
         s.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
         s.style.left = Math.random()*100 + "vw";
-        s.style.top = (Math.random()*100 + 100) + "vh";
-        s.style.animationDuration = (4 + Math.random()*6) + "s";
+        s.style.top = (Math.random()*100 + 120) + "vh";
+        s.style.animationDuration = (5 + Math.random()*6) + "s";
         document.body.appendChild(s);
     }
 </script><div class="container">
-    <h2>FORM KONVERSI RM → IDR</h2><!-- Form data diri -->
-<label>Nama Lengkap</label>
+    <h2>FORM KONVERSI RM → IDR</h2><label>Nama Lengkap</label>
 <input type="text" id="nama" placeholder="Nama kamu" />
 
 <label>Nomor WhatsApp</label>
@@ -158,36 +134,24 @@ input, select {
 <div class="runningText">PROSES CEPAT • AMAN • NO DRAMA • RESPONSIF SETIAP SAAT</div>
 
 <h2 style="margin-top:35px;">TESTIMONI</h2>
-<div class="testimoni" id="testiBox"></div>
+<div class="testiBox" id="testiBox"></div>
 
 </div><script>
 // RATE FIX
-const rate = {
-    maybank: 3700,
-    tng: 3700,
-    qris: 3600
-};
+const rate = { maybank: 3700, tng: 3700, qris: 3600 };
 
-function hitung() {
+function hitungTotal() {
     const jumlah = Number(document.getElementById("jumlahRM").value);
     const metode = document.getElementById("metode").value;
 
-    let rate = metode === "qris" ? 3600 : 3700;
-    let total = jumlah * rate;
+    let r = rate[metode];
+    let total = jumlah * r;
 
-    // tampilkan rincian sebelum animasi total
-    document.getElementById("totalDisplay").innerHTML =
-        `<div style='font-size:16px; margin-bottom:10px;'>`
-        + `Jumlah RM: <b>${jumlah.toLocaleString()}</b><br>`
-        + `Rate: <b>${rate.toLocaleString()}</b><br>`
-        + `Perhitungan: <b>${jumlah.toLocaleString()} × ${rate.toLocaleString()}</b>`
-        + `</div>`;
-
-    // animasi nilai total
-    animateValue("totalDisplay", 0, total, 900);
-}
-        box.innerHTML = "Total: Rp " + angka.toLocaleString();
-    }, 30);
+    document.getElementById("totalBox").innerHTML =
+        `Jumlah RM: <b>${jumlah.toLocaleString()}</b><br>`+
+        `Rate: <b>${r.toLocaleString()}</b><br>`+
+        `Perhitungan: <b>${jumlah.toLocaleString()} × ${r.toLocaleString()}</b><br><br>`+
+        `<span style='font-size:20px;'>Total: Rp <b>${total.toLocaleString()}</b></span>`;
 }
 
 function kirimWA() {
@@ -201,7 +165,6 @@ function kirimWA() {
     window.open(`https://wa.me/6281385371544?text=${pesan}`);
 }
 
-// Testimoni list
 let testimoni = [
     "Mantap proses cepat!",
     "Admin ramah dan respon cepat.",
