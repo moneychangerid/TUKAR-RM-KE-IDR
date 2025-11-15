@@ -7,13 +7,18 @@
     body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background: url('https://i.ibb.co/0V4hVtV/blackgoldbg.jpg');
-        background-size: cover;
-        background-position: center;
-        backdrop-filter: blur(2px);
+        background: linear-gradient(120deg, #001f3f, #005f9e, #00aaff);
+        background-size: 400% 400%;
+        animation: gradientMove 12s ease infinite;
         overflow-x: hidden;
-        color: white;
-    }/* Floating currency symbols */
+        color: #fff;
+    }@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating currency symbols */
 .symbol {
     position: absolute;
     font-size: 28px;
