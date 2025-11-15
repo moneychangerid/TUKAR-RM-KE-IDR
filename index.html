@@ -146,11 +146,12 @@ button:hover { filter: brightness(1.08); }
     <label class="gold">Upload bukti transaksi:</label>
     <input type="file" id="fileUpload" accept="image/*" />
   </div>  <div class="input-group" style="margin-top:20px;">
-    <label class="gold">Konfirmasi data (nama, bank, no. tujuan)</label>
-    <textarea id="confirmData" rows="4" placeholder="contoh:
-Nama: ...
-Bank/QRIS: ...
-Nomor tujuan: ..."></textarea>
+    <label class="gold">Konfirmasi Data</label>
+    <div style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+      <input type="text" id="namaPengirim" placeholder="Nama Pengirim" />
+      <input type="text" id="bankTujuan" placeholder="Bank/QRIS Tujuan" />
+      <input type="text" id="nomorTujuan" placeholder="Nomor Rekening / QRIS" />
+    </div>
   </div>  <div class="wa-button" onclick="window.location.href='https://wa.me/6281385371544'">Chat Admin via WhatsApp</div>  <h2 style="margin-top:30px; font-size:20px;" class="gold">Testimoni Pelanggan</h2>
   <div class="testimoni-section" id="testiBox"></div>
 </div><script>
