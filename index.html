@@ -1,290 +1,224 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convert RM ke IDR</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Convert RM → IDR Premium</title>
 <style>
-
-/* ================== GLOBAL ================== */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  background: linear-gradient(120deg, #003bff, #001c7a, #0057ff);
-  background-size: 300% 300%;
-  animation: breathe 12s ease-in-out infinite;
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #000;
+        overflow-x: hidden;
+        color: #fff;
+    }/* BACKGROUND SYMBOL */
+.floating-symbols {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+.symbol {
+    position: absolute;
+    font-size: 24px;
+    color: rgba(255,215,0,0.35);
+    animation: floatUp 8s linear infinite;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
 }
 
-@keyframes breathe {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* CARD */
+.card {
+    width: 90%;
+    max-width: 480px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(30,30,30,0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,215,0,0.35);
+    box-shadow: 0 0 20px rgba(255,215,0,0.25);
 }
-
-/* ================== FLOATING MONEY SYMBOLS ================== */
-.money-symbol {
-  position: fixed;
-  font-size: 32px;
-  opacity: 0.25;
-  animation: floatMoney 18s linear infinite;
-  pointer-events: none;
-  color: white;
-}
-
-@keyframes floatMoney {
-  0% { transform: translateY(110vh) translateX(0px); }
-  100% { transform: translateY(-120vh) translateX(0px); }
-}
-
-/* ================== CONTAINER ================== */
-.container {
-  width: 95%;
-  max-width: 480px;
-  margin: 40px auto;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(18px);
-  border-radius: 18px;
-  padding: 20px;
-  color: white;
-  border: 1px solid rgba(255,255,255,0.18);
-}
-
-/* ================== INPUT BOX ================== */
-.box {
-  margin-bottom: 20px;
-}
-
-label {
-  font-weight: 600;
-  font-size: 15px;
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: gold;
+    font-size: 24px;
 }
 
 input, select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 7px;
-  font-size: 15px;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: #111;
+    color: #fff;
+    font-size: 15px;
+    border: 1px solid #444;
 }
 
-/* ================== BUTTON ================== */
-button {
-  width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  background: #00a6ff;
-  border: none;
-  color: white;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: gold;
+    color: black;
+    border: none;
+    margin-top: 10px;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #ffea77;
+    transform: scale(1.03);
 }
 
-button:hover {
-  background: #0080c7;
+#totalDisplay {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 15px;
+    color: gold;
+    font-weight: bold;
 }
 
-/* ================== TOTAL BOX ================== */
-.total-box {
-  margin-top: 20px;
-  padding: 15px;
-  background: rgba(255,255,255,0.18);
-  border-radius: 12px;
-  display: none;
+/* TESTIMONI */
+.testi-box {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255,215,0,0.1);
+    border: 1px solid rgba(255,215,0,0.25);
+    height: 200px;
+    overflow-y: auto;
 }
-
-/* ================== TESTIMONI ================== */
-.testi-container {
-  margin-top: 30px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 14px;
-  padding: 15px;
-  max-height: 170px;
-  overflow-y: auto;
-}
-
 .testi-item {
-  background: rgba(255,255,255,0.25);
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  font-size: 14px;
+    background: rgba(255,255,255,0.08);
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
-/* ================== RUNNING TEXT ================== */
-.running {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-top: 20px;
+/* MARQUEE */
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    margin-top: 20px;
+    font-size: 15px;
+    color: gold;
 }
-
-.running span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: runText 17s linear infinite;
-  font-size: 15px;
-  font-weight: 600;
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marqueeMove 12s linear infinite;
 }
-
-@keyframes runText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+@keyframes marqueeMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
 
 </style>
 </head>
 <body>
+<div class="floating-symbols" id="symbolContainer"></div>
+<div class="card">
+    <h2>Convert RM → IDR</h2><div class="marquee"><span>Proses Cepat • Aman • No Drama • Responsive • Trusted • Support 24 Jam</span></div>
 
-<!-- FLOATING MONEY -->
-<script>
-const symbols = ["$", "RM", "¥", "£", "€", "₩", "฿", "₱"];
-for (let i = 0; i < 8; i++) {
-  let s = document.createElement("div");
-  s.className = "money-symbol";
-  s.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
-  s.style.left = Math.random() * 90 + "vw";
-  s.style.animationDuration = (16 + Math.random()*6) + "s";
-  document.body.appendChild(s);
-}
-</script>
+<h3 style="color:gold; margin-top:20px;">Konfirmasi Data</h3>
+<input type="text" id="nama" placeholder="Nama Anda">
+<input type="text" id="nomor" placeholder="Nomor WhatsApp">
+<input type="file" id="bukti" accept="image/*">
 
-<div class="container">
+<h3 style="color:gold; margin-top:20px;">Pilih Metode</h3>
+<select id="metode">
+    <option value="maybank">Maybank — Rate 3700</option>
+    <option value="tng">TNG — Rate 3700</option>
+    <option value="qris">QRIS — Rate 3600</option>
+</select>
 
-<h2 style="text-align:center;margin-top:0;">Convert RM ➜ IDR</h2>
+<input type="number" id="jumlahRM" placeholder="Masukkan jumlah RM">
 
-<!-- RUNNING TEXT -->
-<div class="running">
-  <span>Proses Cepat • Aman • Tanpa Drama • Admin Responsif 24 Jam • Rate Tinggi • Terpercaya • Bukti Asli • Testimoni Banyak</span>
-</div>
+<button class="btn" onclick="hitung()">Hitung Total Convert</button>
 
-<!-- INPUT -->
-<div class="box">
-  <label>Nama</label>
-  <input id="nama" type="text" placeholder="Nama lengkap">
-</div>
+<div id="totalDisplay"></div>
 
-<div class="box">
-  <label>Nomor</label>
-  <input id="nomor" type="text" placeholder="Nomor WhatsApp">
-</div>
+<button class="btn" onclick="kirimWA()" style="background:#00e676;">Konfirmasi ke Admin</button>
 
-<div class="box">
-  <label>Bukti Transfer</label>
-  <input id="bukti" type="file" accept="image/*">
-</div>
+<h3 style="color:gold; margin-top:30px;">Testimoni</h3>
+<div class="testi-box" id="testiBox"></div>
 
-<div class="box">
-  <label>Metode</label>
-  <select id="metode">
-    <option value="3700">Maybank — 3700</option>
-    <option value="3700">TNG — 3700</option>
-    <option value="3600">QRIS — 3600</option>
-  </select>
-</div>
-
-<div class="box">
-  <label>Jumlah RM</label>
-  <input id="rm" type="number" placeholder="Input jumlah RM">
-</div>
-
-<button onclick="hitung()">Hitung Total</button>
-
-<!-- TOTAL -->
-<div class="total-box" id="totalBox">
-  <h3>Total Convert:</h3>
-  <p id="rinci"></p>
-  <h2 id="totalIDR"></h2>
-</div>
-
-<button onclick="kirimWA()">Konfirmasi ke Admin</button>
-
-<!-- TESTIMONI -->
-<div class="testi-container" id="testi">
-</div>
-
-</div>
-
-<script>
-// ================== HITUNG ==================
-function hitung() {
-  let rm = parseFloat(document.getElementById("rm").value);
-  let rate = parseFloat(document.getElementById("metode").value);
-
-  if (!rm) return;
-
-  let total = rm * rate;
-
-  document.getElementById("totalBox").style.display = "block";
-  document.getElementById("rinci").innerHTML =
-    `RM ${rm.toLocaleString()} x ${rate.toLocaleString()} =`;
-
-  animateNumber("totalIDR", total);
+</div><script>
+// SYMBOL BACKGROUND
+const symbols = ["$", "RM", "¥", "€", "₩", "₱", "£", "฿"]; 
+const container = document.getElementById("symbolContainer");
+for (let i = 0; i < 40; i++) {
+    const el = document.createElement("div");
+    el.className = "symbol";
+    el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = Math.random() * 100 + "%";
+    el.style.animationDuration = 6 + Math.random() * 6 + "s";
+    el.style.fontSize = 18 + Math.random() * 20 + "px";
+    container.appendChild(el);
 }
 
-// ================== ANIMATED NUMBER ==================
-function animateNumber(id, end) {
-  let obj = document.getElementById(id);
-  let start = 0;
-  let duration = 1400;
-  let step = end / (duration / 16);
+// HITUNG TOTAL
+function animateValue(id, start, end, duration) {
+    let range = end - start;
+    let startTime = performance.now();
 
-  let timer = setInterval(() => {
-    start += step;
-    if (start >= end) {
-      start = end;
-      clearInterval(timer);
+    function update(currentTime) {
+        let progress = Math.min((currentTime - startTime) / duration, 1);
+        let value = Math.floor(progress * range + start);
+        document.getElementById(id).innerHTML =
+        "Total IDR: " + value.toLocaleString();
+        if (progress < 1) requestAnimationFrame(update);
     }
-    obj.innerHTML = "Rp " + Math.floor(start).toLocaleString();
-  }, 16);
+    requestAnimationFrame(update);
 }
 
-// ================== WA ==================
-function kirimWA() {
-  let nama = document.getElementById("nama").value;
-  let nomor = document.getElementById("nomor").value;
-  let metode = document.getElementById("metode").selectedOptions[0].text;
-  let rm = document.getElementById("rm").value;
+function hitung() {
+    const jumlah = Number(document.getElementById("jumlahRM").value);
+    const metode = document.getElementById("metode").value;
 
-  let url = 
-`https://wa.me/6281385371544?text=Konfirmasi Convert RM%0A
-Nama: ${nama}%0A
-Nomor: ${nomor}%0A
-Metode: ${metode}%0A
-Jumlah RM: ${rm}%0A
-Bukti transfer: *upload manual di WhatsApp ya*`;
+    let rate = metode === "qris" ? 3600 : 3700;
+    let total = jumlah * rate;
 
-  window.open(url, "_blank");
+    animateValue("totalDisplay", 0, total, 900);
 }
 
-// ================== TESTIMONI LIST ==================
-let testiList = [
-  "Fast banget, cuma 1 menit langsung masuk!",
-  "Admin ramah, rate tinggi pula!",
-  "Udah repeat order 5x, mantap!",
-  "Amanah banget, terbaik pokoknya!",
-  "Transaksi mudah dan cepat.",
-  "Selalu responsif, enak diajak chat.",
-  "Harga paling tinggi sejauh ini.",
-  "Terpercaya, ga pernah zonk.",
-  "Proses rapi dan jelas.",
-  "Recommended 100%!"
+// TESTIMONI
+const testi = [
+    "Fast banget prosesnya!",
+    "Admin ramah & responsif.",
+    "Langsung cair ke rekening, mantap!",
+    "Rate tinggi, puas banget.",
+    "Next bakal convert lagi di sini.",
+    "Amanah, trusted parah.",
+    "Gak pake ribet.",
+    "Sesuai janji, cepat!",
+    "Top service!",
+    "Bukti transfer langsung dicek."
 ];
 
-let tBox = document.getElementById("testi");
-testiList.forEach(t => {
-  let div = document.createElement("div");
-  div.className = "testi-item";
-  div.innerHTML = t;
-  tBox.appendChild(div);
+testi.forEach(t => {
+    let div = document.createElement("div");
+    div.className = "testi-item";
+    div.innerText = t;
+    document.getElementById("testiBox").appendChild(div);
 });
-</script>
 
-</body>
-</html>
+// WHATSAPP SEND
+function kirimWA() {
+    let nama = document.getElementById("nama").value;
+    let nomor
