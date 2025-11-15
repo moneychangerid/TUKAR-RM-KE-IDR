@@ -191,9 +191,9 @@ button:hover { filter: brightness(1.08); }
     const fee = rm * feeRate;
     const totalRM = rm - fee;
 
-    let baseRate = 3500;
-    if (method === "tng") baseRate = 3400;
-    if (method === "qris") baseRate = 3300;
+    let baseRate = 3700;
+    if (method === "tng") baseRate = 3700;
+    if (method === "qris") baseRate = 3600;
 
     const finalIDR = totalRM * baseRate;
 
