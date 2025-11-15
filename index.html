@@ -1,213 +1,255 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Converter RM → IDR Premium</title>
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #000;
-        overflow-x: hidden;
-        color: #fff;
-    }/* BACKGROUND SYMBOL — random direction */
-.floating-symbols {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: -1;
-}
-.symbol {
-    position: absolute;
-    font-size: 24px;
-    color: rgba(255,215,0,0.45);
-    animation: floatRandom linear infinite;
-}
-@keyframes floatRandom {
-    0% { transform: translate(0,0); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
-}
-
-/* CARD lebih kecil agar background terlihat */
-.card {
-    width: 90%;
-    max-width: 400px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(30,30,30,0.55);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,215,0,0.4);
-    box-shadow: 0 0 25px rgba(255,215,0,0.25);
-}
-h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: gold;
-    font-size: 24px;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 12px;
-    border: none;
-    outline: none;
-    background: #111;
-    color: #fff;
-    font-size: 15px;
-    border: 1px solid #444;
-}
-
-.btn {
-    width: 100%;
-    padding: 14px;
-    background: gold;
-    color: black;
-    border: none;
-    margin-top: 10px;
-    border-radius: 14px;
-    font-weight: bold;
-    font-size: 17px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.btn:hover {
-    background: #ffea77;
-    transform: scale(1.03);
-}
-
-#totalDisplay {
-    text-align: left;
-    font-size: 16px;
-    margin-top: 15px;
-    color: gold;
-    font-weight: bold;
-    line-height: 1.6;
-}
-
-/* TESTIMONI */
-.testi-box {
-    margin-top: 25px;
-    padding: 15px;
-    border-radius: 15px;
-    background: rgba(255,215,0,0.12);
-    border: 1px solid rgba(255,215,0,0.25);
-    height: 200px;
-    overflow-y: auto;
-}
-.testi-item {
-    background: rgba(255,255,255,0.08);
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 10px;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-/* MARQUEE */
-.marquee {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-top: 20px;
-    font-size: 15px;
-    color: gold;
-}
-.marquee span {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marqueeMove 12s linear infinite;
-}
-@keyframes marqueeMove {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
+  :root{
+    --gold: #ffd966;
+    --gold-strong: rgba(255,215,0,0.45);
+    --card-bg: rgba(22,22,22,0.55);
+  }
+  html,body{height:100%; margin:0; font-family:Arial, Helvetica, sans-serif; background:#000; color:#fff; -webkit-font-smoothing:antialiased;}
+  /* floating symbols background */
+  .floating-symbols{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
+  .symbol{
+    position:absolute;
+    color: rgba(255,215,0,0.28);
+    will-change: transform, opacity;
+    user-select:none;
+    text-shadow:0 0 6px rgba(255,200,80,0.08);
+    mix-blend-mode: screen;
+  }
+  /* card */
+  .wrap{position:relative; z-index:10; padding:30px 20px; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; box-sizing:border-box;}
+  .card{
+    width:94%; max-width:400px; border-radius:18px; padding:22px;
+    background: linear-gradient(180deg, rgba(24,24,24,0.62), rgba(15,15,15,0.48));
+    border:1px solid rgba(255,215,0,0.18);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 40px rgba(255,200,60,0.06) inset;
+    backdrop-filter: blur(10px) saturate(120%);
+  }
+  h2{margin:4px 0 12px; color:var(--gold); text-align:center; font-size:22px;}
+  .marquee{width:100%; overflow:hidden; white-space:nowrap; margin-bottom:12px;}
+  .marquee span{display:inline-block; padding-left:100%; color:var(--gold); animation:marq 12s linear infinite;}
+  @keyframes marq{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+  label{display:block; font-size:13px; color:var(--gold); margin-top:8px;}
+  input[type="text"], input[type="number"], select, input[type="file"]{
+    width:100%; padding:10px 12px; margin-top:8px; border-radius:10px; background:#0e0e0e; color:#fff; border:1px solid rgba(255,255,255,0.04);
+    box-sizing:border-box; font-size:14px;
+  }
+  .btn{width:100%; padding:12px; border-radius:12px; border:none; font-weight:700; cursor:pointer; margin-top:12px; box-shadow:0 6px 18px rgba(0,0,0,0.6);}
+  .btn.gold{background:linear-gradient(90deg,var(--gold),#ffd24d); color:#111;}
+  .btn.green{background:#00e676; color:#022;}
+  .btn:hover{transform:translateY(-2px)}
+  #previewImg{display:none; width:100%; border-radius:10px; margin-top:10px; border:1px solid rgba(255,215,0,0.28);}
+  #totalDisplay{margin-top:12px; color:var(--gold); font-size:14px; line-height:1.6; min-height:56px; white-space:pre-line;}
+  .testi-box{margin-top:18px; height:180px; overflow:auto; border-radius:12px; padding:10px; background:linear-gradient(180deg, rgba(255,215,0,0.03), rgba(255,215,0,0.01)); border:1px solid rgba(255,215,0,0.06);}
+  .testi-item{background:rgba(255,255,255,0.03); padding:8px; margin-bottom:8px; border-radius:8px; font-size:13px;}
+  /* glow on card edges */
+  .card::before{content:""; position:absolute; inset:-2px; z-index:-1; border-radius:20px; background:linear-gradient(90deg, rgba(255,215,0,0.06), rgba(255,180,50,0.03)); filter:blur(20px); pointer-events:none;}
+  /* responsive */
+  @media (max-width:420px){ .card{padding:18px; max-width:360px;} h2{font-size:20px;} }
 </style>
 </head>
-<body><div class="floating-symbols" id="symbolContainer"></div><div class="card">
-    <h2>Convert RM → IDR</h2><div class="marquee"><span>Proses Cepat • Aman • No Drama • Responsif • Trusted • Support 24 Jam</span></div>
+<body>
+  <div class="floating-symbols" id="symbolContainer"></div>
 
-<h3 style="color:gold; margin-top:20px;">Konfirmasi Data</h3>
-<input type="text" id="nama" placeholder="Nama Anda">
-<input type="text" id="nomor" placeholder="Nomor WhatsApp">
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <h2 id="title">Convert RM → IDR</h2>
 
-<!-- UPLOAD FOTO -->
-<label style="margin-top:10px; font-size:14px; color:gold;">Upload Bukti Transfer</label>
-<input type="file" id="buktiFoto" accept="image/*">
+      <div class="marquee"><span>Proses Cepat • Aman • No Drama • Selalu Responsif • Trusted • Support 24 Jam</span></div>
 
-<h3 style="color:gold; margin-top:20px;">Pilih Metode</h3>
-<select id="metode">
-    <option value="maybank">Maybank — Rate 3600</option>
-    <option value="tng">TNG — Rate 3600</option>
-    <option value="qris">QRIS — Rate 3500</option>
-</select>
+      <label for="nama">Nama</label>
+      <input id="nama" type="text" placeholder="Nama Anda" autocomplete="name">
 
-<input type="number" id="jumlahRM" placeholder="Masukkan jumlah RM">
+      <label for="nomor">Nomor WhatsApp</label>
+      <input id="nomor" type="text" placeholder="08xx..." inputmode="tel">
 
-<button class="btn" onclick="hitung()">Hitung Total Convert</button>
+      <label for="buktiFoto">Upload Bukti Transfer (foto)</label>
+      <input id="buktiFoto" type="file" accept="image/*" aria-describedby="previewHelp">
 
-<div id="totalDisplay"></div>
+      <img id="previewImg" alt="Preview bukti transfer">
 
-<button class="btn" onclick="kirimWA()" style="background:#00e676;">Konfirmasi ke Admin</button>
+      <label for="bukti">Catatan / Link (opsional)</label>
+      <input id="bukti" type="text" placeholder="Catatan atau link bukti (opsional)">
 
-<h3 style="color:gold; margin-top:30px;">Testimoni</h3>
-<div class="testi-box" id="testiBox"></div>
+      <label for="metode">Pilih Metode</label>
+      <select id="metode" aria-label="Pilih metode pembayaran">
+        <option value="maybank">Maybank — Rate 3600</option>
+        <option value="tng">TNG — Rate 3600</option>
+        <option value="qris">QRIS — Rate 3500</option>
+      </select>
 
-</div><script>
-// BACKGROUND SYMBOL RANDOM
-const symbols = ["$", "RM", "¥", "€", "₩", "₱", "£", "฿"]; 
-const container = document.getElementById("symbolContainer");
-for (let i = 0; i < 70; i++) {
-    const el = document.createElement("div");
-    el.className = "symbol";
-    el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-    el.style.left = Math.random() * 100 + "%";
-    el.style.top = Math.random() * 100 + "%";
-    el.style.fontSize = 18 + Math.random() * 35 + "px";
-    el.style.animationDuration = 5 + Math.random() * 10 + "s";
-    el.style.setProperty('--dx', (Math.random() * 200 - 100) + "px");
-    el.style.setProperty('--dy', (Math.random() * -300 - 100) + "px");
-    container.appendChild(el);
+      <label for="jumlahRM">Jumlah (RM)</label>
+      <input id="jumlahRM" type="number" placeholder="Masukkan jumlah RM" min="0" step="0.01">
+
+      <button class="btn gold" id="hitungBtn" type="button">Hitung Total Convert</button>
+
+      <div id="totalDisplay" aria-live="polite"></div>
+
+      <button class="btn green" id="konfBtn" type="button">Konfirmasi & Kirim ke Admin (WhatsApp)</button>
+
+      <h3 style="color: #ffd966; margin-top:18px; font-size:16px;">Testimoni</h3>
+      <div class="testi-box" id="testiBox" aria-live="polite" aria-atomic="false"></div>
+    </div>
+  </div>
+
+<script>
+/* ---------- background symbols (many, random size, random direction) ---------- */
+const symbols = ["$", "RM", "¥", "€", "₩", "₱", "£", "฿"];
+const container = document.getElementById('symbolContainer');
+const COUNT = 80; // banyak simbol sesuai permintaan
+for(let i=0;i<COUNT;i++){
+  const el = document.createElement('div');
+  el.className = 'symbol';
+  el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+  // random start pos
+  const left = Math.random()*100;
+  const top = Math.random()*100;
+  el.style.left = left + '%';
+  el.style.top = top + '%';
+  // random size
+  const fs = Math.floor(14 + Math.random()*44);
+  el.style.fontSize = fs + 'px';
+  // random rotation
+  el.style.transform = `rotate(${Math.floor(Math.random()*60-30)}deg)`;
+  // random movement vector - dx/dy pixels
+  const dx = Math.floor((Math.random()*400)-200);
+  const dy = Math.floor((Math.random()*-500)-50); // mostly move up
+  el.style.setProperty('--dx', dx + 'px');
+  el.style.setProperty('--dy', dy + 'px');
+  // random duration and delay
+  const dur = (4 + Math.random()*10).toFixed(1);
+  const delay = (Math.random()*3).toFixed(2);
+  el.style.animation = `floatAnim ${dur}s linear ${delay}s infinite`;
+  el.style.opacity = (0.18 + Math.random()*0.4).toString();
+  container.appendChild(el);
+}
+/* keyframes inserted dynamically to use individual dx/dy via transform in CSS animation */
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+@keyframes floatAnim {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(20deg); opacity: 0; }
+}`;
+document.head.appendChild(styleSheet);
+
+
+/* ---------- preview uploaded foto ---------- */
+const buktiFoto = document.getElementById('buktiFoto');
+const previewImg = document.getElementById('previewImg');
+let lastFile = null;
+buktiFoto.addEventListener('change', (e)=>{
+  const f = e.target.files && e.target.files[0];
+  if(!f){ previewImg.style.display='none'; lastFile=null; return; }
+  lastFile = f;
+  const url = URL.createObjectURL(f);
+  previewImg.src = url;
+  previewImg.style.display = 'block';
+});
+
+/* ---------- animate number and detailed format B ---------- */
+function animateValueMulti(displayEl, start, end, duration, onTick, onComplete){
+  if(isNaN(end) || end < 0){ displayEl.textContent = ''; return; }
+  const startTime = performance.now();
+  function loop(now){
+    const p = Math.min((now - startTime)/duration, 1);
+    const val = Math.floor(start + (end - start) * p);
+    onTick(val, p);
+    if(p < 1) requestAnimationFrame(loop); else onComplete && onComplete();
+  }
+  requestAnimationFrame(loop);
 }
 
-// HITUNG DETAIL FORMAT B
-function hitung() {
-    const jumlah = Number(document.getElementById("jumlahRM").value);
-    const metode = document.getElementById("metode").value;
-
-    let rate = metode === "qris" ? 3500 : 3600;
-    let total = jumlah * rate;
-
-    let detail = `Jumlah RM : ${jumlah}
-` +
-                 `Rate Digunakan : ${rate}
-` +
-                 `Perhitungan : ${jumlah} × ${rate}
-` +
-                 `Total Akhir : ${total.toLocaleString()} IDR`;
-
-    document.getElementById("totalDisplay").innerHTML = detail.replace(/
-/g, '<br>');
+function formatRupiah(n){
+  try{ return n.toLocaleString('id-ID'); }catch(e){ return n; }
 }
 
-// TESTIMONI
+document.getElementById('hitungBtn').addEventListener('click', ()=> {
+  const jumlah = Number(document.getElementById('jumlahRM').value) || 0;
+  const metode = document.getElementById('metode').value;
+  const rate = metode === 'qris' ? 3500 : 3600;
+  const total = Math.round(jumlah * rate);
+
+  if(jumlah <= 0){ document.getElementById('totalDisplay').innerText = 'Masukkan jumlah RM terlebih dahulu.'; return; }
+
+  // animate numeric counting while showing Format B details
+  const display = document.getElementById('totalDisplay');
+  display.innerHTML = `Jumlah RM : ${jumlah}\nRate Digunakan : ${rate}\nPerhitungan : ${jumlah} × ${rate}\nTotal Akhir : 0 IDR`;
+  animateValueMulti(display, 0, total, 1000,
+    (val, progress)=>{
+      // update last line only
+      const lines = `Jumlah RM : ${jumlah}\nRate Digunakan : ${rate}\nPerhitungan : ${jumlah} × ${rate}\nTotal Akhir : ${formatRupiah(val)} IDR`;
+      display.innerHTML = lines.replace(/\n/g,'<br>');
+    },
+    ()=>{ /* done */ }
+  );
+});
+
+/* ---------- testimoni (10) ---------- */
 const testi = [
-    "Fast banget prosesnya!",
-    "Admin ramah & responsif.",
-    "Langsung cair ke rekening, mantap!",
-    "Rate tinggi, puas banget.",
-    "Next bakal convert lagi di sini.",
-    "Amanah, trusted parah.",
-    "Gak pake ribet.",
-    "Sesuai janji, cepat!",
-    "Top service!",
-    "Bukti transfer langsung dicek."
+  "Fast banget prosesnya!",
+  "Admin ramah & responsif.",
+  "Langsung cair ke rekening, mantap!",
+  "Rate tinggi, puas banget.",
+  "Next bakal convert lagi di sini.",
+  "Amanah, trusted parah.",
+  "Gak pake ribet.",
+  "Sesuai janji, cepat!",
+  "Top service!",
+  "Bukti transfer langsung dicek."
 ];
+const testiBox = document.getElementById('testiBox');
 testi.forEach(t => {
-    let div = document.createElement("
+  const d = document.createElement('div');
+  d.className = 'testi-item';
+  d.innerText = t;
+  testiBox.appendChild(d);
+});
+
+/* ---------- Kirim Konfirmasi ke WA (coba Web Share API untuk attach foto, fallback to wa.me) ---------- */
+document.getElementById('konfBtn').addEventListener('click', async ()=>{
+  const nama = document.getElementById('nama').value || '-';
+  const nomor = document.getElementById('nomor').value || '-';
+  const catatan = document.getElementById('bukti').value || '-';
+  const metode = document.getElementById('metode').value;
+  const jumlah = document.getElementById('jumlahRM').value || '-';
+  const rate = (metode === 'qris') ? 3500 : 3600;
+  const msgText = `Halo Admin, saya ingin konfirmasi convert:%0A%0ANama: ${nama}%0ANomor: ${nomor}%0AMetode: ${metode}%0AJumlah RM: ${jumlah}%0ARate: ${rate}%0ACatatan: ${catatan}`;
+
+  // If user selected a file and browser supports sharing files -> try to share with file
+  if(lastFile && navigator.canShare && navigator.canShare({files: [lastFile]})){
+    try{
+      await navigator.share({
+        files: [lastFile],
+        text: `Halo Admin, saya ingin konfirmasi convert.\nNama: ${nama}\nNomor: ${nomor}\nMetode: ${metode}\nJumlah RM: ${jumlah}\nCatatan: ${catatan}`
+      });
+      // navigator.share will open system share sheet (user can choose WhatsApp)
+      return;
+    }catch(err){
+      // share failed - fall through to wa.me fallback
+      console.warn('Web Share failed:', err);
+    }
+  }
+
+  // Fallback: open wa.me with prefilled text (user must attach photo manually)
+  const wa = `https://wa.me/6281385371544?text=${encodeURIComponent(decodeURIComponent(msgText))}`;
+  window.open(wa, '_blank');
+});
+
+/* ---------- accessibility: allow Enter to trigger hitung ---------- */
+document.getElementById('jumlahRM').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('hitungBtn').click(); }
+});
+
+/* ---------- small guard: revoke object URLs on unload ---------- */
+window.addEventListener('beforeunload', ()=>{
+  try{ if(previewImg && previewImg.src) URL.revokeObjectURL(previewImg.src); }catch(e){}
+});
+</script>
+</body>
+</html>
