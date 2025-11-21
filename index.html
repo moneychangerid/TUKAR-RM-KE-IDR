@@ -255,18 +255,17 @@ function kirimWA() {
     let nama = document.getElementById("nama").value;
     let nomor = document.getElementById("nomor").value;
     let bukti = document.getElementById("bukti").value;
+    let jumlah = document.getElementById("jumlahRM").value; // ← Tambahan
 
-    let msg =
-`Halo Admin, saya ingin konfirmasi convert:
-
-Nama: ${nama}
+    let msg = 
+`Nama: ${nama}
 Nomor: ${nomor}
+Jumlah RM: ${jumlah}
 Catatan: ${bukti}`;
 
-    // Kirim WA + foto lewat picker
-    let waUrl = `https://wa.me/6282179093974?text=${encodeURIComponent(msg)}`;
-    window.open(waUrl, "_blank");
-}
+    let url = "https://wa.me/62895618126262?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank");
+    }
 </script>
 
 </body>
